@@ -1,0 +1,70 @@
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-in Page</title>
+    <link rel="stylesheet" href="{% static 'css/adminlogin-reg.css' %}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="Home-Page.html">Home</a></li>
+                <li><a href="#">Book</a></li>
+                <li><a href="Login-Page.html">Login</a></li>
+                <li><a href="Signin-page.html">Sign In</a></li>
+                <li><a href="aim.html ">Our Aim</a></li>
+                <li><a href="#aboutus">About Us</a></li>
+                <li><a href="#contactinfo">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <img src="{% static 'images/weblogo.png' %}" alt="ReservEat">
+    <div class="container">
+        <h2>Sign in</h2>
+        <form method="post">
+            {% if success_message %}
+                <div class="alert alert-success">
+                    {{ success_message }}
+                </div>
+                {% endif %}
+            {% csrf_token %}
+            <div class="column">
+                <label for="First Name">First Name: </label>
+                <input type="text" name="firstname" placeholder="First Name" required>
+
+                <label for="phonenumber"> Phone Number: </label>
+                <input type="tel" name="telephoneno" placeholder="Enter Your Mobile Number" required>
+            </div>
+            <div class="column">
+
+                <label for="Last Name">Last Name:</label>
+                <input type="text" name="lastname" placeholder="Last Name" required>
+
+                <label for="email">Email: </label>
+                <input type="email" name="email" placeholder="Enter Your Email">
+
+                
+
+
+                <label for="password">Create Password</label>
+                <input type="password" name="password" placeholder="Create Password" required>
+
+
+                <label for="confirmPwd">Re-Enter Password:</label>
+                <input type="password" name="password" placeholder="Re-Enter Password" required>
+            </div>
+
+
+            <button type="submit">Login</button>
+        </form>
+        <p class="login">
+            Already have an account? <a href="Login-Page.html" class="login-account-link">(Login)</a>
+        </p>
+    </div>
+</body>
+
+</html>
