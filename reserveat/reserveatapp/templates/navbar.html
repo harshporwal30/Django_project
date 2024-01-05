@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReservEat  Table Booking Website</title>
+  <link rel="icon" type="image/png" href="{% static 'images/icon.PNG' %}" sizes="32x32 64x64">
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/managerestaurant.css' %}">
+
+
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="{% static 'images/weblogo.png' %}" alt="Restaurant Booking Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="Home-Page.html">Home</a></li>
+        <li><a href="booking page.html">Book</a></li>
+
+        {% if user %}
+            <li><a href="#">Logged in as {{ user }}</a></li>
+            <li><a href="#">Logout</a></li>
+        {% else %}
+            <li><a href="Login-Page.html">Login</a></li>
+            <li><a href="Signin-page.html">Sign In</a></li>
+            <li><a href="aim.html ">Our Aim</a></li>
+        {% endif %}
+        
+        <li><a href="#aboutus">About Us</a></li>
+        <li><a href="#contactinfo">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  {% block mycontent %}
+  {% endblock %}
+</body>
+</html>
