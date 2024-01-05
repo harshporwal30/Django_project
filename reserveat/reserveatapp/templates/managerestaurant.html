@@ -1,0 +1,81 @@
+{% extends 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Your Restaurant</title>
+</head>
+
+<body>
+    {% block mycontent %}
+    
+    <div class="restaurant-header">
+        <h1>Manage Your Restaurant</h1>
+        
+    </div>
+
+    <!-- Main content section -->
+    <div class="restaurant-main-container">
+        <!-- Restaurant Information Section -->
+        <section class="restaurant-info">
+            <h2>Your Restaurant Information</h2>
+            <!-- Display restaurant information here -->
+            <p>Restaurant Name: Your Restaurant</p>
+            <p>Address: Your Address</p>
+            <p>Contact: Your Contact</p>
+            <!-- Add more information as needed -->
+
+            <!-- Edit restaurant information form -->
+            <form action="" method="post" class="restaurant-info-form">
+                {% csrf_token %}
+                <!-- Add form fields for editing information -->
+                <label for="new_name">New Restaurant Name:</label>
+                <input type="text" id="new_name" name="new_name" required>
+                <!-- Add more fields as needed -->
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+
+        <!-- Ambiance and Table Management Section -->
+        <section class="ambiance-tables">
+            <h2>Ambiance and Table Management</h2>
+            <!-- Add functionality for adding ambiance images and managing tables -->
+            <!-- For example, you can provide a form to add ambiance images -->
+            <form action="" method="post" enctype="multipart/form-data" class="ambiance-tables-form">
+                {% csrf_token %}
+                <label for="ambiance_image">Add Ambiance Image:</label>
+                <input type="file" id="ambiance_image" name="ambiance_image" accept="image/*" required>
+                <button type="submit">Upload Image</button>
+            </form>
+
+            <!-- Display existing ambiance images and table status -->
+            <div class="ambiance-images-container">
+                <!-- Display ambiance images here -->
+                <!-- You can use CSS to style these images -->
+                <!-- Example Placeholder Image -->
+                <img src="" alt="Ambiance Image 1" class="ambiance-image">
+                <img src="" alt="Ambiance Image 2" class="ambiance-image">
+                <!-- Add more images as needed -->
+            </div>
+
+            <!-- Table status and management -->
+            <h3 class="table-status-header">Table Status</h3>
+            <!-- Display a table grid with options to mark tables as booked/available -->
+            <!-- You can use CSS to style the table grid and buttons -->
+            <div class="table-grid-container">
+                <!-- Example Table Grid Placeholder -->
+                <div class="table-container available-table">Table 1</div>
+                <div class="table-container booked-table">Table 2</div>
+                <div class="table-container available-table">Table 3</div>
+                <!-- Add more tables as needed -->
+            </div>
+        </section>
+    </div>
+
+    {% endblock %}
+</body>
+
+</html>
