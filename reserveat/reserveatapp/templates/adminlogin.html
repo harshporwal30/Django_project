@@ -1,0 +1,48 @@
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-in Page</title>
+    <link rel="stylesheet" href="{% static 'css/adminlogin-reg.css' %}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="Home-Page.html">Home</a></li>
+                <li><a href="#">Book</a></li>
+                <li><a href="Login-Page.html">Login</a></li>
+                <li><a href="Signin-page.html">Sign In</a></li>
+                <li><a href="aim.html ">Our Aim</a></li>
+                <li><a href="#aboutus">About Us</a></li>
+                <li><a href="#contactinfo">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <img src="{% static 'images/weblogo.png' %}" alt="ReservEat">
+    <div class="container-login">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter Your Username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter Your Password" required>
+
+            <label for="remember-me">
+                <input type="checkbox" id="remember-me" name="remember-me"> Remember Me
+            </label>
+
+            <button type="submit">Login</button>
+        </form>
+        <p><a href="forgot-password.html" class="forgetpwd">Forgot Password?</a></p>
+        <p class="create-account">
+            Don't have an account? <a href="Signin-page.html" class="create-account-link">(Create an Account)</a>
+        </p>
+    </div>
+</body>
+</html>
