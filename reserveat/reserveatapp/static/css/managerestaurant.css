@@ -1,0 +1,108 @@
+/* Add these styles to your existing CSS or create a new CSS file */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* Header styles */
+.restaurant-header {
+    
+    color: #333;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Main Container styles */
+.restaurant-main-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Restaurant Information Section styles */
+.restaurant-info {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.restaurant-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.restaurant-info-form {
+    margin-top: 10px;
+}
+
+/* Ambiance and Table Management Section styles */
+.ambiance-tables {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.ambiance-tables h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.ambiance-tables-form {
+    margin-top: 10px;
+}
+
+.ambiance-images-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.ambiance-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.table-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.table-container {
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.available-table {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.booked-table {
+    background-color: #FF5733;
+    color: #fff;
+}
+
+/* Footer styles */
+.restaurant-footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
