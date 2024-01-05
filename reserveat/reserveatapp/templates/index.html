@@ -1,0 +1,111 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+<html>
+
+<body>
+    {% block mycontent %}
+    <!-- Hero div -->
+    <div class="hero">
+        <h1>Discover the Best Dining Experience</h1>
+        <!-- Search and Filter Options -->
+        <div class="search-filter">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search restaurants">
+                <button id="search-button">Search</button>
+            </div>
+            <div class="filter-options">
+                <label for="cuisine">Cuisine:</label>
+                <select id="cuisine">
+                    <option value="all">All Cuisines</option>
+                    <option value="indian">Indian</option>
+                    <option value="italian">Italian</option>
+                    <option value="chinese">Chinese</option>
+                </select>
+                <label for="location">Location:</label>
+                <select id="location">
+                    <option value="all">All Locations</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="NaviMumbai">Navi Mumbai</option>
+                    <option value="nearby">Nearby</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Restaurants or Offers -->
+    <div class="featured-restaurants">
+        <h2>Featured Restaurants</h2>
+        <div class="grid-container">
+            <!-- Restaurant 1 -->
+            <div class="restaurant">
+                <img class="imgcss" src="{% static 'images/res-1.jpg' %}" alt="Indian Restaurant 1">
+                <h3>Indian Spice Delight</h3>
+                <p>Authentic Indian cuisine in the heart of the city.</p>
+                <a href="booking form.html">Book Table</a>
+            </div>
+            <!-- Main Content Container (Grid) -->
+            <div class="main-container">
+                <div class="reviews">
+                    <!-- Reviews -->
+                    <div class="reviews">
+                        <h2>Ratings and Reviews By Our Customers:</h2>
+                        <div class="review-grid">
+                            <div class="review">
+                                <h3>Rakesh Singh:</h3>
+                                <p class="review-text">"Great food and excellent service! I highly recommend this
+                                    restaurant."</p>
+                                <p class="review-rating">Rating: <span
+                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                </p>
+                            </div>
+                            <div class="review">
+                                <h3>Mamta Trivedi:</h3>
+                                <p class="review-text">"The ambiance here is fantastic. I had an amazing dining
+                                    experience."</p>
+                                <p class="review-rating">Rating: <span
+                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                                </p>
+                            </div>
+                            <div class="review">
+                                <h3>Priya:</h3>
+                                <p class="review-text">"Delicious food and friendly staff. I'll definitely be back!"</p>
+                                <p class="review-rating">Rating: <span
+                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                </p>
+                            </div>
+                            <div class="review">
+                                <h3>Somesh Bhavsar:</h3>
+                                <p class="review-text">"I had a wonderful time dining here. The flavors were exquisite."
+                                </p>
+                                <p class="review-rating">Rating: <span
+                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                                </p>
+                            </div>
+                            <div class="review">
+                                <h3>Rajesh Sharma:</h3>
+                                <p class="review-text">"The food was delicious, and the staff was very attentive. I'll
+                                    definitely be back."
+                                </p>
+                                <p class="review-rating">Rating: <span
+                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
+                            </div>
+                            <div class="review">
+                                <h3>Priya Patel:</h3>
+                                <p class="review-text">"I had a great experience at this restaurant. The flavors were
+                                    authentic, just like
+                                    home."</p>
+                                <p class="review-rating">Rating: <span
+                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
