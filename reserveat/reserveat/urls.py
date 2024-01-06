@@ -20,7 +20,8 @@ from reserveatapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('registration/', views.reg),
-    path('adlogin/', views.adminlogin),
-    path('manage/', views.manageres)
+    path('registration/', views.reg, name='adminreg'),
+    path('adlogin/', views.adminlogin, name='adminlogin'),
+    path('manage/', views.manageres),
+    path('logout/', views.logout, name= "logout")
 ]

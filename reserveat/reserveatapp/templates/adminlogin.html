@@ -32,16 +32,20 @@
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" placeholder="Enter Your Password" required>
+            {% if msg %}
+                <div class="alert-error">
+                    {{ msg }}
+                </div>
+                {% endif %}
 
             <label for="remember-me">
                 <input type="checkbox" id="remember-me" name="remember-me"> Remember Me
             </label>
-
-            <button type="submit">Login</button>
+            <button type="submit">Login as Admin</button>
         </form>
         <p><a href="forgot-password.html" class="forgetpwd">Forgot Password?</a></p>
         <p class="create-account">
-            Don't have an account? <a href="Signin-page.html" class="create-account-link">(Create an Account)</a>
+            Don't have an account? <a href="{% url 'adminreg' %}" class="create-account-link">(Create an Account)</a>
         </p>
     </div>
 </body>

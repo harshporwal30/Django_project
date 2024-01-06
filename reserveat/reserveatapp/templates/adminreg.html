@@ -27,7 +27,7 @@
         <h2>Sign in</h2>
         <form method="post">
             {% if success_message %}
-                <div class="alert alert-success">
+                <div class="alert-success">
                     {{ success_message }}
                 </div>
                 {% endif %}
@@ -59,10 +59,10 @@
             </div>
 
 
-            <button type="submit">Login</button>
+            <button type="submit">Register as Admin</button>
         </form>
         <p class="login">
-            Already have an account? <a href="Login-Page.html" class="login-account-link">(Login)</a>
+            Already have an account? <a href="{% url 'adminlogin' %}" class="login-account-link">(Login)</a>
         </p>
     </div>
 </body>

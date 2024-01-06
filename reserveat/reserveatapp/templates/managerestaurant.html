@@ -2,18 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Your Restaurant</title>
-</head>
-
 <body>
     {% block mycontent %}
-    
+    {% if restaurant %}
     <div class="restaurant-header">
         <h1>Manage Your Restaurant</h1>
-        
     </div>
 
     <!-- Main content section -->
@@ -22,11 +15,12 @@
         <section class="restaurant-info">
             <h2>Your Restaurant Information</h2>
             <!-- Display restaurant information here -->
-            <p>Restaurant Name: Your Restaurant</p>
-            <p>Address: Your Address</p>
-            <p>Contact: Your Contact</p>
+            <p>Restaurant Name: {{ restaurant.name }}</p>
             <!-- Add more information as needed -->
-
+            {% elif message %}
+            <div class="alert-error">
+                {{ message }}
+            </div>
             <!-- Edit restaurant information form -->
             <form action="" method="post" class="restaurant-info-form">
                 {% csrf_token %}
@@ -54,10 +48,9 @@
             <!-- Display existing ambiance images and table status -->
             <div class="ambiance-images-container">
                 <!-- Display ambiance images here -->
-                <!-- You can use CSS to style these images -->
-                <!-- Example Placeholder Image -->
-                <img src="" alt="Ambiance Image 1" class="ambiance-image">
-                <img src="" alt="Ambiance Image 2" class="ambiance-image">
+                {% for ambiance_image in restaurant.ambianceimage_set.all %}
+                    <img src="{{ ambiance_image.image.url }}" alt="Ambiance Image" class="ambiance-image">
+                {% endfor %}
                 <!-- Add more images as needed -->
             </div>
 
@@ -66,14 +59,21 @@
             <!-- Display a table grid with options to mark tables as booked/available -->
             <!-- You can use CSS to style the table grid and buttons -->
             <div class="table-grid-container">
-                <!-- Example Table Grid Placeholder -->
-                <div class="table-container available-table">Table 1</div>
-                <div class="table-container booked-table">Table 2</div>
-                <div class="table-container available-table">Table 3</div>
+                {% for table in restaurant.table_set.all %}
+                    <div class="table-container {% if table.booked %}booked-table{% else %}available-table{% endif %}">
+                        {{ table.name }}
+                    </div>
+                {% endfor %}
                 <!-- Add more tables as needed -->
             </div>
         </section>
     </div>
+    {% else %}
+    <div class="alert-access">
+        {{ msg }}
+        <a href="{% url 'adminlogin' %}">Login</a>
+    </div>
+    {% endif %}
 
     {% endblock %}
 </body>
