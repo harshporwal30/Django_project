@@ -11,94 +11,63 @@ body {
 .alert-access {
     font-size: larger;
     padding: 15px;
-    margin: 50px auto; /* Center the box horizontally and add some top margin */
+    width: 15%;
+    margin: 220px auto;
     border: 1px solid transparent;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: #e64a2b;
-    background-color: #f8d7da; /* Background color - you can adjust this */
+    background-color: #f8d7da;
     text-align: center;
 }
 
 .alert-access a {
-    display: inline-block;
-    margin-top: 10px; 
+    display: block;
+    margin: 10px auto;
     padding: 10px 20px;
-    background-color: #e64a2b; 
+    width: 50px;
+    background-color: #e64a2b;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+
 }
 
 .alert-access a:hover {
-    background-color: #c53e2d; 
+    background-color: #c53e2d;
 }
 
 .alert-error {
-    font-size: smaller;
+    font-size: large;
     padding: 5px;
     margin-bottom: 10px;
     border: 1px solid transparent;
     border-radius: 4px;
-    color: #e64a2b;}
+    background-color: #f8d7da;
+    color: #e64a2b;
+}
+
+
 /* Header styles */
-.restaurant-header {
-    
-    color: #333;
-    text-align: center;
-    padding: 10px;
-}
 
-/* Main Container styles */
-.restaurant-main-container {
+
+
+.user-info {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 20px;
+
+    text-align: left;
 }
 
-/* Restaurant Information Section styles */
-.restaurant-info {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.restaurant-info h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.restaurant-info-form {
-    margin-top: 10px;
-}
 
 /* Ambiance and Table Management Section styles */
-.ambiance-tables {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.ambiance-tables h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
 
 .ambiance-tables-form {
+    padding: 20px;
     margin-top: 10px;
+    width: 80%;
 }
 
-.ambiance-images-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 10px;
-}
 
 .ambiance-image {
     width: 100%;
@@ -108,37 +77,160 @@ body {
     margin-bottom: 10px;
 }
 
-.table-grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+/* Footer styles */
+
+.form-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+
+}
+
+.info-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+.info-form h2{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.form-button{
+        background-color: var(--accent-color);
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        display: block;
+        margin: auto;
+        margin-top: 10px;        
+    }
+
+
+
+
+button:hover {
+    background-color: #ff3300;
+}
+
+.button1:hover {
+    background-color: #ff3300;
+}
+
+
+.user-info p {
+    margin: 8px 30px;
+    font-size: 16px;
+    color: #555;
+}
+
+
+.top-section {
+
+    color: #333;
+    padding: 20px;
+    text-align: center;
+}
+
+.dashboard-container {
+    display: flex;
+    padding: 20px;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.top-section {
+
+    color: #333;
+    padding: 20px;
+    text-align: center;
+}
+
+.dashboard-container {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.info-container {
+    width: 40%;
+    padding: 20px;
+    background-color: #fff;
+    margin-left: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.restaurant-info {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.restaurant-info-column {
+
+    display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
-.table-container {
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    cursor: pointer;
+.restaurant-info h2 {
+    color: #333;
 }
 
-.available-table {
-    background-color: #4CAF50;
-    color: #fff;
+.restaurant-info p {
+    margin: 10px 0;
+    font-size: 16px;
 }
 
-.booked-table {
-    background-color: #FF5733;
-    color: #fff;
+.bookings-info-container {
+    width: 40%;
+    padding: 20px;
+    background-color: #fff;
+    margin-right: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Footer styles */
-.restaurant-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+.bookings-info-container h2 {
+    color: #333;
 }
 
+.res-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 8px;
+}

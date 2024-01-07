@@ -11,7 +11,7 @@ class resadmin(models.Model):
         db_table= 'admin-login'
 
 class restaurant(models.Model):
-    owner_id= models.ForeignKey(resadmin, on_delete= models.CASCADE)
+    ownerid= models.ForeignKey(resadmin, on_delete= models.CASCADE)
     res_name= models.CharField(max_length= 200)
     res_address= models.CharField(max_length= 500)
     res_contact= models.BigIntegerField()
@@ -20,8 +20,14 @@ class restaurant(models.Model):
 
 class tables(models.Model):
     res_id= models.ForeignKey(restaurant, on_delete= models.CASCADE)
-    tablen0= models.IntegerField()
+    tableno= models.IntegerField()
     seating_capacity= models.IntegerField()
     booking_status= models.BooleanField(default= False)
     class meta:
         db_table= 'tables'
+
+class ambianceimg(models.Model):
+    image= models.ImageField(upload_to='media')
+    resid= models.ForeignKey(restaurant, on_delete= models.CASCADE)
+    class meta:
+        db_table= "ambiance"

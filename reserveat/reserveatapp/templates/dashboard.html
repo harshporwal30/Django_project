@@ -1,0 +1,87 @@
+{% extends 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Your Restaurant</title>
+</head>
+
+<body>
+    {% block mycontent %}
+    
+    <div class="main-box">
+
+
+        <div class="top-section">
+            <h1>Welcome to My Dashboard</h1>
+            <div class="user-info">
+                <p><i class="fa fa-user" aria-hidden="true"></i>
+                    Name: {{user.firstname}} {{user.lastname}}</p>
+                <p><i class="fa fa-envelope" aria-hidden="true"></i>
+                    Email: {{user.email}}</p>
+            </div>
+            <!-- Display information -->
+        </div>
+        {% if restaurant %}
+        <div class="dashboard-container">
+            <div class="info-container">
+                <div class="restaurant-info">
+
+                    <div class="restaurant-info-column">
+                        <h2>Restaurant Information</h2>
+                        <p>Restaurant Name: {{restaurant.res_name}}</p>
+                        <p>Location: {{restaurant.res_address}}</p>
+                        <p>Contact: {{restaurant.res_contact}}</p>
+                        <button onclick="manageButtonClicked()">Manage</button>
+                    </div>
+
+                    
+                    <img class="res-img" src="/static/images/res-1.jpg" alt="Restaurant Image">
+
+                </div>
+            </div>
+
+            <div class="bookings-info-container">
+                <h2>Bookings Information</h2>
+
+            </div>
+        </div>
+    </div>
+
+
+    {% elif message %}
+    <div class="alert-error">
+        {{ message }}
+    </div>
+    <div class="form-div">
+    <!-- Edit restaurant information  -->
+    <form class="info-form" method="post" action="{% url 'create' %}">
+        {% csrf_token %}
+        <h2>Restaurant Form</h2>
+        <label for="restaurantName">Restaurant Name:</label>
+        <input type="text"  name="new_name" required>
+    
+        <label for="address">Address:</label>
+        <input type="text" name="new_address" required>
+    
+        <label for="contactNumber">Contact Number:</label>
+        <input type="tel" name="telephoneno" required>
+    
+        <button class="form-button" type="submit">Proceed to Next Form</button>
+      </form></div>
+
+    </div>
+    {% else %}
+    <div class="alert-access">
+        {{ msg }}
+        <a href="{% url 'adminlogin' %}">Login</a>
+    </div>
+    {% endif %}
+    </div>
+
+    {% endblock %}
+</body>
+
+</html>

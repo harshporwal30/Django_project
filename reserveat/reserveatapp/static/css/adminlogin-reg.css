@@ -1,15 +1,19 @@
 header {
     color: #fff;
     padding: 10px 20px;
+    background-color: #333;
+    display: flex;
+    justify-content: flex-end;
 }
+
+
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: flex-end;
-    /* Align list items to the right */
+    
     margin-left: auto;
-    /* Push the list items to the right */
 }
 
 nav li {
@@ -29,9 +33,10 @@ nav a:hover {
 
 body {
     font-family: Arial, sans-serif;
-    background-image: url('/static/images/loginbg.jpg');
+    /*background-image: url('/static/images/loginbg.jpg');*/
     background-position: left;
     background-size: cover;
+    margin: 0;
 }
 
 img {
@@ -46,10 +51,10 @@ img {
     width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: antiquewhite;
+    
 }
 
 .column {
@@ -84,7 +89,7 @@ input[type="email"] {
 button {
     background-color: #ff6600;
     color: #fff;
-    width: 95%;
+    width: 30%;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -93,8 +98,24 @@ button {
     margin: auto;
 }
 
-button:hover {
+.button1 {
     background-color: #ff6600;
+    color: #fff;
+    width: 30%;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 10px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+}
+
+button:hover {
+    background-color: #ff3300;
+}
+
+.button1:hover {
+    background-color: #ff3300;
 }
 
 
@@ -139,10 +160,10 @@ button:hover {
     width: 400px;
     margin: 0 auto;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: antiquewhite;}
+    }
 
 .forgetpwd {
     padding: 10px;

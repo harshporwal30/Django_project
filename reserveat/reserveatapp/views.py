@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .models import resadmin, restaurant
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse
-from django.contrib import messages
 # Create your views here.
 def reg(request):
     if request.method == "GET":
@@ -32,7 +31,7 @@ def adminlogin(request):
 
             if flag:
                 request.session['admin']= request.POST.get('username')
-                return redirect('../manage/')
+                return redirect('../dashboard/')
             else:
                  error_message ="Wrong username or password"
                  return render(request, 'adminlogin.html', {'msg': error_message})
@@ -45,21 +44,37 @@ def logout(request):
         del request.session['admin']
         return redirect('../adlogin/')
     
-from django.shortcuts import render
-from .models import resadmin, restaurant
-
-def manageres(request):
+def dashboard(request):
     if 'admin' in request.session:
         usersession = request.session['admin']
         userobj = resadmin.objects.get(email=usersession)
-        resobj = restaurant.objects.filter(owner_id=userobj.id)
+        resobj = restaurant.objects.filter(ownerid_id=userobj.id)
 
         if resobj:
-            return render(request, 'managerestaurant.html', {'user': userobj.firstname, 'restaurant': resobj})
+            robj = restaurant.objects.get(ownerid_id=userobj.id)
+            return render(request, 'dashboard.html', {'user': userobj, 'restaurant': robj})
         else:
             message = "Oops! You haven't registered any restaurant yet. Please register a restaurant with us."
-            return render(request, 'managerestaurant.html', {'user': userobj.firstname, 'message': message})
+            return render(request, 'dashboard.html', {'user': userobj, 'message': message})
 
     else:
         error_message ="Unauthorized Access."
-        return render(request, 'managerestaurant.html', {'msg': error_message})
+        return render(request, 'dashboard.html', {'msg': error_message})
+    
+def addrestaurant(request):
+    if request.method == "POST":
+        userid= request.session['admin']
+        aobj= resadmin.objects.get(email= userid)
+        name= request.POST['new_name']
+        address= request.POST['new_address']
+        contact= request.POST['telephoneno']
+        restaurantobj= restaurant(res_name= name, res_address= address, res_contact= contact, ownerid_id= aobj.id)
+        restaurantobj.save()
+        return redirect('../add-ambiance/')
+    
+def addambiance(request):
+    if UnicodeTranslateError:
+        dd= UserWarning
+
+def index(request):
+    return render(request, 'index.html')
