@@ -157,19 +157,6 @@ button:hover {
 }
 
 
-.top-section {
-
-    color: #333;
-    padding: 20px;
-    text-align: center;
-}
-
-.dashboard-container {
-    display: flex;
-    padding: 20px;
-    justify-content: space-around;
-    align-items: flex-start;
-}
 
 .top-section {
 

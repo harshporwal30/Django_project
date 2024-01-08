@@ -25,5 +25,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard),
     path('logout/', views.logout, name= "logout"),
     path('add/', views.addrestaurant, name="create"),
-    path('index/', views.index)
+    path('add-ambiance/', views.addambiance, name="upld")
 ]

@@ -1,0 +1,37 @@
+{% extends 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    {% block mycontent %}
+
+    <div class="main-box">
+        <div class="top-section">
+            <h1>Welcome to My Dashboard</h1>
+            <div class="user-info">
+                <p><i class="fa fa-user" aria-hidden="true"></i>
+                    Name: {{user.firstname}} {{user.lastname}}</p>
+                <p><i class="fa fa-envelope" aria-hidden="true"></i>
+                    Email: {{user.email}}</p>
+            </div>
+            <!-- Display information -->
+        </div>
+        <div class="ambianceform-div">
+            <!-- Edit restaurant information  -->
+            <form class="ambiance-form" method="post" action="{% url 'upld' %}">
+                {% csrf_token %}
+                <h2>Upload Ambiance Images</h2>
+                <label>Choose Image</label>
+
+
+                <input type="file" name="ambiance" required>
+                <button class="upload-button" type="submit">Upload</button>
+
+            </form>
+        </div>
+
+    </div>
+    {% endblock %}
+</body>
+
+</html>

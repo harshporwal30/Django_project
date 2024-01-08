@@ -1,0 +1,86 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.user-info {
+    display: grid;
+
+    text-align: left;
+}
+
+.user-info p {
+    margin: 8px 30px;
+    font-size: 16px;
+    color: #555;
+}
+
+.top-section {
+
+    color: #333;
+    padding: 20px;
+    text-align: center;
+}
+
+.ambianceform-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+
+}
+
+.ambiance-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+.ambiance-form h2{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.form-button{
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    display: block;
+    margin: auto;
+    margin-top: 10px;        
+}
+
+.upload-button {
+    display: block;
+    margin-left: auto;
+    margin-right: 5%;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    
+}

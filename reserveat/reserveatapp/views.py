@@ -73,8 +73,8 @@ def addrestaurant(request):
         return redirect('../add-ambiance/')
     
 def addambiance(request):
-    if UnicodeTranslateError:
-        dd= UserWarning
-
-def index(request):
-    return render(request, 'index.html')
+    if 'admin' in request.session:
+        usersession = request.session['admin']
+        userobj = resadmin.objects.get(email=usersession)
+        resobj = restaurant.objects.filter(ownerid_id=userobj.id)
+        return render(request, 'ambianceform.html',{'user': userobj})
