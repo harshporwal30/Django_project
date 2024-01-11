@@ -14,12 +14,13 @@
                 <p><i class="fa fa-envelope" aria-hidden="true"></i>
                     Email: {{user.email}}</p>
             </div>
-            <!-- Display information -->
+           
         </div>
         <div class="ambianceform-div">
             <!-- Edit restaurant information  -->
-            <form class="ambiance-form" method="post" action="{% url 'upld' %}">
+            <form class="ambiance-form" method="post" action="{% url 'upld' %}" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="hidden" value="{{ restaurant.id }}" name="rid">
                 <h2>Upload Ambiance Images</h2>
                 <label>Choose Image</label>
 

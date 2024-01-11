@@ -1,0 +1,40 @@
+{% extends 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+{% block mycontent %}
+<div class="main-box">
+    <div class="top-section">
+        <h1>Welcome to My Dashboard</h1>
+        <div class="user-info">
+            <p><i class="fa fa-user" aria-hidden="true"></i>
+                Name: {{user.firstname}} {{user.lastname}}</p>
+            <p><i class="fa fa-envelope" aria-hidden="true"></i>
+                Email: {{user.email}}</p>
+            
+        </div>
+    </div>
+</div>
+<div class="table-form-div">
+    <form class="table-form">
+        <h2>Table Registration Form</h2>
+        <label for="tableName">Table Name:</label>
+        <input type="text" name="tableName" required>
+
+<label for="tableName">Table Number:</label>
+        <input type="number" name="tableName" required>
+        <label for="seatingCapacity">Seating Capacity:</label>
+        <input type="number"  name="seatingCapacity" min="1" required>
+
+        <label for="location">Location:</label>
+        <input type="text" name="location" required>
+
+        <button class="regbl-button">Register Table</button>
+    </form>
+</div>
+    {% endblock %}
+</body>
+
+</html>

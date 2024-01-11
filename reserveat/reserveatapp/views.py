@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import resadmin, restaurant
+from .models import resadmin, restaurant, ambianceimg
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse
+from django.forms import ModelForm
+
 # Create your views here.
 def reg(request):
     if request.method == "GET":
@@ -74,7 +76,34 @@ def addrestaurant(request):
     
 def addambiance(request):
     if 'admin' in request.session:
-        usersession = request.session['admin']
-        userobj = resadmin.objects.get(email=usersession)
-        resobj = restaurant.objects.filter(ownerid_id=userobj.id)
-        return render(request, 'ambianceform.html',{'user': userobj})
+        if request.method == "GET":
+            usersession = request.session['admin']
+            userobj = resadmin.objects.get(email=usersession)
+            return render(request, 'ambianceform.html',{'user': userobj})
+        elif request.method == "POST":
+            usersession = request.session['admin']
+            userobj = resadmin.objects.get(email=usersession)
+            print(userobj.id)
+            resobj= restaurant.objects.get(ownerid_id=userobj.id)
+            print(resobj.id)
+            image_file= request.FILES.get('ambiance')
+            print(image_file)
+            print(request.FILES)
+            if resobj:
+                if image_file:
+                    ambobj= ambianceimg(image=image_file, resid=resobj)
+                    ambobj.save()
+                    return redirect('../reg-table/')
+                else:
+                    return HttpResponse("sorry")
+            else:
+                return HttpResponse("restaurant does not exits")
+
+def addtables(request):
+    usersession = request.session['admin']
+    userobj = resadmin.objects.get(email=usersession)
+    resobj= restaurant.objects.get(ownerid_id=userobj.id)
+    
+    return render(request, 'tabelreg-form.html',{'user': userobj, 'restaurant': resobj})
+
+
