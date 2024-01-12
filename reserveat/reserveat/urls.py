@@ -24,11 +24,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('registration/', views.reg, name='adminreg'),
     path('adlogin/', views.adminlogin, name='adminlogin'),
-    path('dashboard/', views.dashboard),
+    path('dashboard/', views.dashboard,name="dashboard"),
     path('logout/', views.logout, name= "logout"),
     path('add/', views.addrestaurant, name="create"),
     path('add-ambiance/', views.addambiance, name="upld"),
-    path('reg-table/', views.addtables)
+    path('reg-table/', views.addtables, name="regtable"),
+    path('tables/', views.tablelog, name="tables"),
+    path('add-table/', views.rtables, name="addtable"),
+    path('resvere/', views.reserve, name="addreservation")
 ]
 
 

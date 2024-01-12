@@ -6,8 +6,8 @@ body {
 }
 
 .user-info {
-    display: grid;
-
+    display: flex;
+    justify-content: space-between;
     text-align: left;
 }
 
@@ -18,11 +18,13 @@ body {
 }
 
 .top-section {
-
+    
     color: #333;
     padding: 20px;
     text-align: center;
 }
+
+
 
 .ambianceform-div{
     display: flex;
@@ -84,3 +86,4 @@ input {
     font-size: 16px;
     
 }
+

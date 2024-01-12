@@ -1,0 +1,75 @@
+{% extends 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Your Restaurant</title>
+</head>
+
+<body>
+    {% block mycontent %}
+    <div class="container">
+        <div class="sidebar">
+
+            <ul>
+                <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{% url 'tables' %}"><i class="fa fa-table"></i> Table Logistics</a></li>
+                <li><a href="#menu"><i class="fa fa-cutlery"></i> Menu Management</a></li>
+                <li><a href="#bookings"><i class="fa fa-calendar"></i> Reservation Administration</a></li>
+                <li><a href="#customers"><i class="fa fa-users"></i> Customer Management</a></li>
+                <li><a href="#staff"><i class="fa fa-users"></i> Staff Management</a></li>
+                <li><a href="#analytics"><i class="fa fa-bar-chart"></i> Analytics</a></li>
+                <li><a href="#settings"><i class="fa fa-cogs"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="main-box">
+
+
+
+
+                <div class="top-section">
+                    <h1>Table Logistics</h1>
+                </div>
+
+                <div class="dashboard-container">
+                    <div class="info-container">
+                        <h2>Table Information</h2>
+                        <!-- Add your table logistics content here -->
+                        <table class="table-logistics">
+                            <thead>
+                                <tr>
+                                    <th>Table Number</th>
+                                    <th>Location</th>
+                                    <th>Capacity</th>
+                                    <th>Status</th>
+                                    <th>Availabe for Booking</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in table %}
+                                <tr>
+                                    
+                                    <td>{{i.tableno}}</td>
+                                    <td>{{i.table_location}}</td>
+                                    <td>{{i.seating_capacity}}</td>
+                                    <td>{{i.booking_status}}</td>
+                                    <td>{{i.available}}</td>
+                                    <td><a href="">Manage</a></td>
+                                </tr>
+                               {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+</body>
+
+</html>

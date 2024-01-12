@@ -28,6 +28,8 @@
     background-color: var(--primary-bg-color);
     color: #fff;
    padding-left: 10px;
+   position: fixed;
+   width: 100%;
   }
   
   .logo img {
@@ -53,3 +55,6 @@
   nav a:hover {
     color: var(--accent-color);
   }
+
+
+  
