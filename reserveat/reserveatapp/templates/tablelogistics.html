@@ -16,10 +16,7 @@
             <ul>
                 <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                 <li><a href="{% url 'tables' %}"><i class="fa fa-table"></i> Table Logistics</a></li>
-                <li><a href="#menu"><i class="fa fa-cutlery"></i> Menu Management</a></li>
-                <li><a href="#bookings"><i class="fa fa-calendar"></i> Reservation Administration</a></li>
-                <li><a href="#customers"><i class="fa fa-users"></i> Customer Management</a></li>
-                <li><a href="#staff"><i class="fa fa-users"></i> Staff Management</a></li>
+                <li><a href="{% url 'res-administration' %}"><i class="fa fa-calendar"></i> Reservation Administration</a></li>
                 <li><a href="#analytics"><i class="fa fa-bar-chart"></i> Analytics</a></li>
                 <li><a href="#settings"><i class="fa fa-cogs"></i> Settings</a></li>
             </ul>
@@ -27,16 +24,13 @@
 
         <div class="main-content">
             <div class="main-box">
-
-
-
-
                 <div class="top-section">
                     <h1>Table Logistics</h1>
                 </div>
 
                 <div class="dashboard-container">
                     <div class="info-container">
+                        {% if table %}
                         <h2>Table Information</h2>
                         <!-- Add your table logistics content here -->
                         <table class="table-logistics">
@@ -53,17 +47,51 @@
                             <tbody>
                                 {% for i in table %}
                                 <tr>
-                                    
+
                                     <td>{{i.tableno}}</td>
                                     <td>{{i.table_location}}</td>
                                     <td>{{i.seating_capacity}}</td>
-                                    <td>{{i.booking_status}}</td>
+                                    <td>{% if i.booking_status %}
+                                        Booked
+                                        {% else %}
+                                        Availabe
+                                        {% endif %}</td>
                                     <td>{{i.available}}</td>
-                                    <td><a href="">Manage</a></td>
+                                    <td><a href="{% url 'managetable' i.id %}">Manage</a></td>
                                 </tr>
-                               {% endfor %}
+                                {% endfor %}
                             </tbody>
                         </table>
+                        {% elif etable %}
+
+                        <form style="width: 40%;" method="post" action="{% url 'updttable' etable.id %}">
+                            {% csrf_token %}
+                            <h2>Table update Form</h2>
+                            <label for="tableName">Table Name:</label>
+                            <input type="text" name="tableName" value="{{etable.tablename}}" required>
+                            <label for="tableName">Table Number:</label>
+                            <input type="number" name="tableNumber" value="{{etable.tableno}}" required>
+                            <label for="seatingCapacity">Seating Capacity:</label>
+                            <input type="number" name="seatingCapacity" min="1" value="{{etable.seating_capacity}}"
+                                required>
+
+                            <label for="location">Location:</label>
+                            <input type="text" name="location" value="{{etable.table_location}}" required>
+                            <label for="availability">Mark as Available</label>
+                            <select name="selection" style="text-align: left;" required>
+                                <option value="Yes" {% if etable.available %}selected{% endif %}>Yes</option>
+                                <option value="No" {% if not etable.available %}selected{% endif %}>No</option>
+                            </select>
+                            <button class="regbl-button">Update Table</button>
+                        </form>
+                        {% else %}
+    <div class="alert-access">
+        {{ msg }}
+        <a href="{% url 'adminlogin' %}">Login</a>
+    </div>
+    {% endif %}
+
+                        
                     </div>
                 </div>
             </div>

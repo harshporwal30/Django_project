@@ -12,10 +12,9 @@
     <header>
         <nav>
             <ul>
-                <li><a href="Home-Page.html">Home</a></li>
-                <li><a href="#">Book</a></li>
-                <li><a href="Login-Page.html">Login</a></li>
-                <li><a href="Signin-page.html">Sign In</a></li>
+                
+                <li><a href="{% url 'adminlogin' %}">Login</a></li>
+                <li><a href="{% url 'adminreg' %}">Sign In</a></li>
                 <li><a href="aim.html ">Our Aim</a></li>
                 <li><a href="#aboutus">About Us</a></li>
                 <li><a href="#contactinfo">Contact Us</a></li>
@@ -38,6 +37,9 @@
 
                 <label for="phonenumber"> Phone Number: </label>
                 <input type="tel" name="telephoneno" placeholder="Enter Your Mobile Number" required>
+
+                <label for="password">Create Password</label>
+                <input type="password" name="password" placeholder="Create Password" required>
             </div>
             <div class="column">
 
@@ -47,11 +49,8 @@
                 <label for="email">Email: </label>
                 <input type="email" name="email" placeholder="Enter Your Email">
 
+            
                 
-
-
-                <label for="password">Create Password</label>
-                <input type="password" name="password" placeholder="Create Password" required>
 
 
                 <label for="confirmPwd">Re-Enter Password:</label>

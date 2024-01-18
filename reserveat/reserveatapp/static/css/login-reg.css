@@ -1,0 +1,215 @@
+header {
+    color: #fff;
+    padding: 10px 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ff6600;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('/static/images/loginbg.jpg');
+    background-position: left;
+    background-size: cover;
+}
+
+img {
+    width: 250px;
+    display: flex;
+    margin: auto;
+    margin-top: 80px;
+    margin-bottom: 10px;
+}
+
+.container {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: antiquewhite;
+}
+
+h2 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #ff6600;
+    color: #fff;
+    width: 95%;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+}
+
+button:hover {
+    background-color: #ff6600;
+}
+
+.forgetpwd {
+    padding: 10px;
+    font-size: 12px;
+    color: gray;
+}
+
+.create-account {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.create-account-link {
+    color: #ff3300;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.create-account-link:hover {
+    color: #ff3300;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+
+/*registration page css */
+
+.reg-container {
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: antiquewhite;
+}
+
+.column {
+    width: auto;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5%;
+
+
+}
+
+h2 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="password"],
+input[type="email"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #ff6600;
+    color: #fff;
+    width: 95%;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+}
+
+button:hover {
+    background-color: #ff6600;
+}
+
+
+.login {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.login-account-link {
+    color: #ff3300;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-account-link:hover {
+    color: #ff3300;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.reglogo {
+    width: 250px;
+    display: flex;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.alert-success {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-error {
+    font-size: smaller;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #e64a2b;
+}

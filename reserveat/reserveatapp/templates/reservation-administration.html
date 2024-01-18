@@ -1,0 +1,88 @@
+{% extends 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    {% block mycontent %}
+    <div class="container">
+        <div class="sidebar">
+
+            <ul>
+                <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{% url 'tables' %}"><i class="fa fa-table"></i> Table Logistics</a></li>
+
+                <li><a href="{% url 'res-administration' %}"><i class="fa fa-calendar"></i> Reservation Administration</a></li>
+
+                <li><a href="#analytics"><i class="fa fa-bar-chart"></i> Analytics</a></li>
+                <li><a href="#settings"><i class="fa fa-cogs"></i> Settings</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            
+            <div class="reservation-admin-container">
+                <h1>Reservation Administration</h1>
+
+                <div class="filter-section">
+                    <form method="post" action="{% url 'res-administration' %}">
+                        {% csrf_token %}
+                        <label for="time_slot">Select Time Slot:</label>
+                        <select name="time_slot" id="time_slot">
+                            <option value="">All Time Slots</option>
+                            {% for slot in time_slots %}
+                                <option value="{{ slot.start_time }}-{{ slot.end_time }}">{{ slot.start_time }} - {{ slot.end_time }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Filter</button>
+                    </form>
+
+                    <label for="bookingStatus">Filter by Booking Status:</label>
+                    <select id="bookingStatus" name="bookingStatus">
+                        <option value="confirmed">Confirmed</option>
+                        <option value="pending">Pending</option>
+                        <option value="canceled">Canceled</option>
+                    </select>
+
+                    <button id="applyFilterBtn">Apply Filters</button>
+                </div>
+                {% if booking %}
+                <div class="reservation-list">
+                    <h2>Reservation List</h2>
+                    <!-- Display reservation list here -->
+                    <table class="res-table">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Booked At</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in booking %}
+                            <tr>
+                                <td>{{i.customerid.first_name}}</td>
+                                <td>{{i.booking_date}}</td>
+                                <td>{{i.start_time}}</td>
+                                <td>{{i.created_at}}</td>
+                                <td><button>Edit</button> <button>Cancel</button></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% elif msg %}
+    <div class="alert-access">
+        {{ msg }}
+        <a href="{% url 'adminlogin' %}">Login</a>
+    </div>
+    {% else %}
+    <h2>No records Found</h2>
+    {% endif %}
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

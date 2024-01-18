@@ -31,7 +31,15 @@ urlpatterns = [
     path('reg-table/', views.addtables, name="regtable"),
     path('tables/', views.tablelog, name="tables"),
     path('add-table/', views.rtables, name="addtable"),
-    path('resvere/', views.reserve, name="addreservation")
+    path('resvere/', views.reserve, name="addreservation"),
+    path('manage-table/<int:id>/', views.managetable, name="managetable"),
+    path('update/<int:id>', views.update, name="updttable"),
+    path('administration/', views.reservationadm, name="res-administration"),
+    path('index/', views.rstrnt.as_view()),
+    path('login/', views.login, name="login"),
+    path('user-registration/', views.registration),
+    path('update-res/<int:id>',views.updatres, name="updtres" ),
+    path('settings/', views.settings, name="settings")
 ]
 
 
