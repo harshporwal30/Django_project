@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="icon" type="image/png" href="Images/icon.PNG" sizes="32x32 64x64">
+    <link rel="stylesheet" href="{% static 'css/login-reg.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="Home-Page.html">Home</a></li>
+                <li><a href="Login-Page.html">Login</a></li>
+                <li><a href="Signin-page.html">Sign In</a></li>
+                <li><a href="aim.html ">Our Aim</a></li>
+                <li><a href="#aboutus">About Us</a></li>
+                <li><a href="#contactinfo">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <img src="/static/images/weblogo.png" alt="ReservEat">
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username"><i class="fa fa-envelope"></i> Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter Your Username" required>
+
+            <label for="password"><i class="fa fa-key"></i> Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter Your Password" required>
+            {% if msg %}
+                <div class="alert-error">
+                    {{ msg }}
+                </div>
+                {% endif %}
+
+            <label for="remember-me">
+                <input type="checkbox" id="remember-me" name="remember-me"> Remember Me
+            </label>
+
+            <button type="submit" >Login</button>
+        </form>
+        <p><a href="forgot-password.html" class="forgetpwd">Forgot Password?</a></p>
+        <p class="create-account">
+            Don't have an account? <a href="Signin-page.html" class="create-account-link">(Create an Account)</a>
+        </p>
+    </div>
+</body>
+
+</html>

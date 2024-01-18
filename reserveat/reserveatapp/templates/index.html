@@ -1,10 +1,11 @@
-{% extends 'navbar.html' %}
+{% extends 'nav-footer.html' %}
 {% load static %}
 
 <html>
 
 <body>
     {% block mycontent %}
+    {% if session %}
     <!-- Hero div -->
     <div class="hero">
         <h1>Discover the Best Dining Experience</h1>
@@ -38,73 +39,99 @@
         <h2>Featured Restaurants</h2>
         <div class="grid-container">
             <!-- Restaurant 1 -->
+            {% for i in resobj %}
             <div class="restaurant">
-                <img class="imgcss" src="{% static 'images/res-1.jpg' %}" alt="Indian Restaurant 1">
-                <h3>Indian Spice Delight</h3>
-                <p>Authentic Indian cuisine in the heart of the city.</p>
+                <img class="imgcss" src="{{i.image.url}}" alt="Indian Restaurant 1">
+                <h3>{{ i.res_name }}</h3>
+                <p>{{i.res_description}}</p>
                 <a href="booking form.html">Book Table</a>
             </div>
+            {% endfor %}
+        </div>
             <!-- Main Content Container (Grid) -->
             <div class="main-container">
                 <div class="reviews">
-                    <!-- Reviews -->
-                    <div class="reviews">
-                        <h2>Ratings and Reviews By Our Customers:</h2>
-                        <div class="review-grid">
-                            <div class="review">
-                                <h3>Rakesh Singh:</h3>
-                                <p class="review-text">"Great food and excellent service! I highly recommend this
-                                    restaurant."</p>
-                                <p class="review-rating">Rating: <span
-                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                                </p>
-                            </div>
-                            <div class="review">
-                                <h3>Mamta Trivedi:</h3>
-                                <p class="review-text">"The ambiance here is fantastic. I had an amazing dining
-                                    experience."</p>
-                                <p class="review-rating">Rating: <span
-                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-                                </p>
-                            </div>
-                            <div class="review">
-                                <h3>Priya:</h3>
-                                <p class="review-text">"Delicious food and friendly staff. I'll definitely be back!"</p>
-                                <p class="review-rating">Rating: <span
-                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                                </p>
-                            </div>
-                            <div class="review">
-                                <h3>Somesh Bhavsar:</h3>
-                                <p class="review-text">"I had a wonderful time dining here. The flavors were exquisite."
-                                </p>
-                                <p class="review-rating">Rating: <span
-                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-                                </p>
-                            </div>
-                            <div class="review">
-                                <h3>Rajesh Sharma:</h3>
-                                <p class="review-text">"The food was delicious, and the staff was very attentive. I'll
-                                    definitely be back."
-                                </p>
-                                <p class="review-rating">Rating: <span
-                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
-                            </div>
-                            <div class="review">
-                                <h3>Priya Patel:</h3>
-                                <p class="review-text">"I had a great experience at this restaurant. The flavors were
-                                    authentic, just like
-                                    home."</p>
-                                <p class="review-rating">Rating: <span
-                                        class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
-                            </div>
-                        </div>
+                  <!-- Reviews -->
+                  <div class="reviews">
+                    <h2>Ratings and Reviews By Our Customers:</h2>
+                    <div class="review-grid">
+                      <div class="review">
+                        <h3>Rakesh Singh:</h3>
+                        <p class="review-text">"Great food and excellent service! I highly recommend this restaurant."</p>
+                        <p class="review-rating">Rating: <span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </p>
+                      </div>
+                      <div class="review">
+                        <h3>Mamta Trivedi:</h3>
+                        <p class="review-text">"The ambiance here is fantastic. I had an amazing dining experience."</p>
+                        <p class="review-rating">Rating: <span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </p>
+                      </div>
+                      <div class="review">
+                        <h3>Priya:</h3>
+                        <p class="review-text">"Delicious food and friendly staff. I'll definitely be back!"</p>
+                        <p class="review-rating">Rating: <span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </p>
+                      </div>
+                      <div class="review">
+                        <h3>Somesh Bhavsar:</h3>
+                        <p class="review-text">"I had a wonderful time dining here. The flavors were exquisite."</p>
+                        <p class="review-rating">Rating: <span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </p>
+                      </div>
+                      <div class="review">
+                        <h3>Rajesh Sharma:</h3>
+                        <p class="review-text">"The food was delicious, and the staff was very attentive. I'll definitely be back."
+                        </p>
+                        <p class="review-rating">Rating: <span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
+                      </div>
+                      <div class="review">
+                        <h3>Priya Patel:</h3>
+                        <p class="review-text">"I had a great experience at this restaurant. The flavors were authentic, just like
+                          home."</p>
+                        <p class="review-rating">Rating: <span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
+                      </div>
                     </div>
-
+                  </div>
+            
                 </div>
-            </div>
+            
+                <div class="about-us" id="aboutus">
+                  <!-- About Us div -->
+                  <div class="about-us">
+                    <h2>About Us</h2>
+                    <p>Welcome to our restaurant booking platform! We are passionate about bringing you the best dining experiences
+                      at your fingertips.</p>
+                    <p>Our mission is to connect food enthusiasts with the finest restaurants, ensuring memorable meals and
+                      exceptional service.</p>
+                    <p>Our dedicated team works tirelessly to curate a diverse selection of restaurants and simplify the reservation
+                      process, making it easy for you to explore and enjoy the culinary wonders our partnered establishments offer.
+                    </p>
+                    <p>Thank you for choosing us as your dining companion. We look forward to serving you and helping you discover
+                      the perfect dining experience.</p>
+                  </div>
+            
+            
+            
+                  <!-- Call to Action (CTA) -->
+                  <div class="cta">
+                    <div class="cta">
+                      <h2>Ready to Book Table?</h2>
+                      <p>Explore our selection of restaurants and reserve your table today to experience culinary excellence.</p>
+                      <a href="#" class="cta-button">Explore Restaurants</a>
+                    </div>
+            
+                  </div>
+                </div>
+              </div>
         </div>
     </div>
+    {% else %}
+    <div class="alert-access">
+      {{msg}}
+      <a href="{% url 'login' %}">Login</a>
+  </div>
+  {% endif %}
     {% endblock %}
 </body>
 
