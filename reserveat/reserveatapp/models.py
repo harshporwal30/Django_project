@@ -1,6 +1,7 @@
 from django.db import models
-
+from django.utils import timezone
 # Create your models here.
+
 class resadmin(models.Model):
     firstname= models.CharField(max_length= 200)
     lastname= models.CharField(max_length= 200)
@@ -15,6 +16,7 @@ class restaurant(models.Model):
     res_name= models.CharField(max_length= 200)
     res_address= models.CharField(max_length= 500)
     res_contact= models.BigIntegerField()
+    res_description= models.CharField(max_length= 500, default= '')
     class meta:
         db_table= 'restaurants'
 
@@ -25,7 +27,7 @@ class tables(models.Model):
     seating_capacity= models.IntegerField()
     table_location= models.CharField(max_length=200, default="" )
     booking_status= models.BooleanField(default= False)
-    available= models.BooleanField(default= True)
+    available= models.CharField(max_length= 200, default= True)
     class meta:
         db_table= 'tables'
 
@@ -45,12 +47,15 @@ class users(models.Model):
     class meta:
         db_table= 'users'
 
+
 class bookings(models.Model):
     restaurantid= models.ForeignKey(restaurant, on_delete= models.CASCADE)
     tableid= models.ForeignKey(tables, on_delete= models.CASCADE)
     customerid= models.ForeignKey(users, on_delete= models.CASCADE)
     created_at = models.DateTimeField(auto_now= True)
-    booked_for= models.DateField()
-    booking_time= models.TimeField()
+    booking_date= models.DateField()
+    start_time= models.CharField(max_length= 200)
+    end_time= models.CharField(max_length= 200)
     class meta:
         db_table= 'bookings'
+

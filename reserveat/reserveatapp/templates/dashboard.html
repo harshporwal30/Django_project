@@ -17,10 +17,10 @@
                 <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                 <li><a href="{% url 'tables' %}"><i class="fa fa-table"></i> Table Logistics</a></li>
                 
-                <li><a href="#bookings"><i class="fa fa-calendar"></i> Reservation Administration</a></li>
+                <li><a href="{% url 'res-administration' %}"><i class="fa fa-calendar"></i> Reservation Administration</a></li>
                 
                 <li><a href="#analytics"><i class="fa fa-bar-chart"></i> Analytics</a></li>
-                <li><a href="#settings"><i class="fa fa-cogs"></i> Settings</a></li>
+                <li><a href="{% url 'settings' %}"><i class="fa fa-cogs"></i> Settings</a></li>
             </ul>
         </div>
 
@@ -45,7 +45,7 @@
 
                         <p>Location: {{restaurant.res_address}}</p>
                         <p>Contact: {{restaurant.res_contact}}</p>
-                        <button onclick="manageButtonClicked()">Manage</button>
+                        
 
                     </div>
                     <div class="tables-container">
@@ -64,13 +64,25 @@
                                 <label>Date:</label>
                                 <input type="date" name="date" required>
 
-                                <label>Time:</label>
-                                <input type="time" name="time" required>
+                                <label for="time">Select Time Slot:</label>
+                                <select name="time" required>
+                                    {% for slot in time_slots %}
+                                        <option value="{{ slot.start_time }}-{{ slot.end_time }}">
+                                            {{ slot.start_time }} - {{ slot.end_time }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
 
                                 <label for="table">Select Table:</label>
                                 <select name="table" required>
-                                    <option value=1>Table 1</option>
-                                    <option value=2>Table 2</option>
+                                    {% for i in table %}
+                                    {% if not i.booking_status %}
+                                    <option value=
+                                    {{i.tableno}}
+                                    >Table {{i.tableno}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                    
                                 </select>
 
                                 <button type="submit">Create Booking</button>
@@ -97,7 +109,13 @@
                                         <td>{{i.tableno}}</td>
 
                                         <td>{{i.seating_capacity}}</td>
-                                        <td>{{i.booking_status}}</td>
+                                        <td>
+                                            {% if i.booking_status %}
+                                            Booked
+                                            {% else %}
+                                            Availabe
+                                            {% endif %}
+                                        </td>
 
 
                                     </tr>
