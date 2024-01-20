@@ -1,0 +1,77 @@
+{% extends 'nav-footer.html' %}
+{% load static %}
+
+<html>
+
+<body>
+    {% block mycontent %}
+    {% if user %}
+    
+    <div class="image-container1">
+        <div class="ambiance-images1">
+            <img class="ambiance-image1" src="{% static 'images/family dining table.jpg' %}" alt="Ambiance Image 1">
+            <img class="ambiance-image1" src="{% static 'images/res-1.jpg' %}" alt="Ambiance Image 2">
+            <img class="ambiance-image1" src="{% static 'images/family dining table.jpg' %}" alt="Ambiance Image 3">
+            <!-- Add more images as needed -->
+        </div>
+        <button class="scroll-button left-button" onclick="scrollImages('left')">←</button>
+        <button class="scroll-button right-button" onclick="scrollImages('right')">→</button>
+    </div>
+<div class="restaurant-details">
+    <h1>Amazing Restaurant</h1>
+    <p>Welcome to Amazing Restaurant, where every dish is a masterpiece!</p>
+    <p>Address: 123 Main Street, Cityville</p>
+    <p>Contact: +1 123-456-7890</p>
+    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua.</p>
+</div>
+
+<div class="table-section">
+    <h2>Table Availability</h2>
+    <ul class="table-list">
+        <li>Table 1 - Available</li>
+        <li>Table 2 - Occupied</li>
+        <li>Table 3 - Available</li>
+        <!-- Add more tables as needed -->
+    </ul>
+    <button class="book-table-button" onclick="bookTable()">Book a Table</button>
+</div>
+
+
+{% else %}
+    <div class="alert-access">
+      {{msg}}
+      <a href="{% url 'login' %}">Login</a>
+  </div>
+  {% endif %}
+
+  <script>
+    const ambianceImages = document.querySelector('.ambiance-images1');
+    const images = ['image1', 'image2', 'image3'];
+    let currentIndex = 0;
+
+    window.scrollImages = function (direction) {
+        const imageWidth = document.querySelector('.ambiance-image1').offsetWidth;
+        const maxIndex = images.length - 1;
+
+        if (direction === 'left' && currentIndex > 0) {
+            currentIndex--;
+        } else if (direction === 'right' && currentIndex < maxIndex) {
+            currentIndex++;
+        }
+
+        ambianceImages.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        function bookTable() {
+            
+            alert("Table booked successfully!");
+        }
+    });
+</script>
+
+    {% endblock %}
+</body>
+
+</html>

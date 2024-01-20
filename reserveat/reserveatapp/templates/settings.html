@@ -20,7 +20,7 @@
                 <li><a href="{% url 'res-administration' %}"><i class="fa fa-calendar"></i> Reservation Administration</a></li>
                 
                 <li><a href="#analytics"><i class="fa fa-bar-chart"></i> Analytics</a></li>
-                <li><a href="#settings"><i class="fa fa-cogs"></i> Settings</a></li>
+                <li><a href="{% url 'settings' %}"><i class="fa fa-cogs"></i> Settings</a></li>
             </ul>
         </div>
 
@@ -29,7 +29,8 @@
 
 
 
-                {% if user %}
+                {% if user and restaurant %}
+
                 <div class="top-section">
 
                     <div class="res-img">
@@ -45,27 +46,51 @@
                         <h2>Restaurant Form</h2>
                         <label for="restaurantName">Restaurant Name:</label>
                         <input type="text" name="new_name" value="{{restaurant.res_name}}" required>
-        
+
                         <label for="address">Address:</label>
                         <input type="text" name="new_address" value="{{restaurant.res_address}}" required>
-        
+
                         <label for="contactNumber">Contact Number:</label>
                         <input type="tel" name="telephoneno" value="{{restaurant.res_contact}}" required>
 
                         <label for="Desription">Desription:</label>
                         <input type="text" name="des" value="{{restaurant.res_description}}" required>
                         <button class="form-button" type="submit">Save Changes</button>
-                    </form> 
+                    </form>
+
+                    <form class="ambiance-form" method="post" action="{% url 'otamb' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ restaurant.id }}" name="rid">
+                        <h2>Upload Ambiance Images</h2>
+                        <label>Choose Image</label>
+
+
+                        <input type="file" name="ambiance" required>
+                        <div class="upload-buttons">
+                            <button class="view-button" type="submit">Upload</button>
+                            <a href="../viewgallery/" class="view-button"
+                                style="text-decoration: none; width: fit-content; ">View Gallery</a>
+
+                        </div>
+                    </form>
+
+                    {% elif gallery %}
                     <div class="img-column">
-                        {% for i in ambiance %}
-                        <img class="imgcss" src="{{i.image.url}}" alt="Indian Restaurant 1">
-                        <div class="edit-cancel-buttons">
-                            <button>Edit</button>
-                            <button>Cancel</button>
+                        {% for i in gallery %}
+                        <div class="image-container"> <img class="imgcss" src="{{i.image.url}}"
+                                alt="Indian Restaurant 1">
+
+                            <form method="post" action="{% url 'deleteimg' i.id %}">
+                            {% csrf_token %}
+                            <button class="upload-buttons" type="submit">Delete</button>
+                        </form>
                         </div>
                         {% endfor %}
                     </div>
-                   
+
+
+
+
                 </div>
 
 
@@ -77,7 +102,7 @@
         <div class="alert-error">
             {{ message }}
         </div>
-        
+
 
     </div>
     {% else %}
@@ -85,6 +110,7 @@
         {{ msg }}
         <a href="{% url 'adminlogin' %}">Login</a>
     </div>
+
     {% endif %}
     </div>
     </div>
