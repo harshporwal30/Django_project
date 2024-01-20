@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import resadmin, restaurant, ambianceimg,tables, bookings, users
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView, UpdateView, DeleteView
 from django.utils import timezone
 
 # Create your views here.
@@ -104,8 +104,8 @@ def addambiance(request):
             if resobj:
                 if image_file:
                     flag = True
-                    ambobj= ambianceimg(image=image_file, resid=resobj)
-                    ambobj.save()
+                    resobj.res_display= image_file
+                    resobj.save()
                     return render(request, 'ambianceform.html', {'flag': flag, 'user': adminobj, 'restaurant': resobj})
                 else:
                     return HttpResponse("sorry")
@@ -231,11 +231,51 @@ def updatres(request, id):
     
 
 def settings(request):
-    usersession = request.session['admin']
-    adminobj = resadmin.objects.get(email=usersession)
-    resobj= restaurant.objects.get(ownerid_id=adminobj.id)
-    ambianceimage= ambianceimg.objects.filter(resid_id= resobj.id)
-    return render(request, 'settings.html', {'user': adminobj, 'restaurant': resobj, 'ambiance': ambianceimage})
+    if 'admin' in request.session:
+        usersession = request.session['admin']
+        adminobj = resadmin.objects.get(email=usersession)
+        resobj= restaurant.objects.get(ownerid_id=adminobj.id)
+        return render(request, 'settings.html', {'user': adminobj, 'restaurant': resobj})
+    else:
+        error_message ="Unauthorized Access."
+        return render(request, 'tablelogistics.html',{'msg': error_message})
+
+def otamb(request):
+    if request.method == "POST":
+            usersession = request.session['admin']
+            adminobj = resadmin.objects.get(email=usersession)
+           
+            resobj= restaurant.objects.get(ownerid_id=adminobj.id)
+            
+            image_file= request.FILES.get('ambiance')
+            if resobj:
+                if image_file:
+                    flag = True
+                    amb= ambianceimg(image=image_file, resid_id= resobj.id)
+                    amb.save()
+                    return render(request, 'settings.html', {'flag': flag, 'user': adminobj, 'restaurant': resobj})
+                
+def viewgallery(request):
+    if 'admin' in request.session:
+        usersession = request.session['admin']
+        adminobj = resadmin.objects.get(email=usersession)
+        resobj= restaurant.objects.get(ownerid_id=adminobj.id)
+        ambianceimage= ambianceimg.objects.filter(resid_id= resobj.id)
+        return render(request, 'settings.html', {'user': adminobj,'gallery': ambianceimage})
+    else:
+        error_message ="Unauthorized Access."
+        return render(request, 'tablelogistics.html',{'msg': error_message})
+    
+
+def deleteimg(request, id):
+    if request.method == "POST":
+        usersession = request.session['admin']
+        adminobj = resadmin.objects.get(email=usersession)
+        
+        ambianceimge= ambianceimg.objects.get(id=id)
+        ambianceimge.delete()
+        
+        return redirect("../../viewgallery/")
 
 
 #user end views
@@ -258,20 +298,18 @@ def registration(request):
     
 
 
-class rstrnt(ListView):
-    model= restaurant, ambianceimg
-    template_name= "index.html"
-    context_object_name= "resobj"
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if 'user' in self.request.session:
-            data = self.request.session['user']
-            user = users.objects.get(email=data)
-            context['session'] = user
-            return context
-        else:
-            error_message = "Unauthorized Access."
-            return {'msg': error_message}
+
+
+def rstrnt(request):
+    if 'user' in request.session:
+        userobj= request.session['user']
+        cobj= users.objects.get(email=userobj)
+        resobj= restaurant.objects.all()
+        return render(request, 'index.html', {'resobj': resobj, 'user': cobj})
+    else:
+        error_message = "Unauthorized Access."
+        return render (request, 'index.html',{'msg': error_message})
+
 
 def login(request):
     if request.method == "GET":
@@ -295,3 +333,12 @@ def login(request):
         
 
 
+def details(request):
+    if 'user' in request.session:
+        userobj= request.session['user']
+        cobj= users.objects.get(email=userobj)
+        resobj= restaurant.objects.all()
+        return render(request, 'resdetail.html', {'resobj': resobj, 'user': cobj})
+    else:
+            error_message = "Unauthorized Access."
+            return {'msg': error_message}
