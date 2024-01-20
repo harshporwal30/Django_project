@@ -43,7 +43,8 @@ urlpatterns = [
     path('settings/', views.settings, name="settings"),
     path('viewgallery/', views.viewgallery),
     path('delete/<int:id>/', views.deleteimg, name="deleteimg"),
-    path('details/', views.details, name="viewdetails")
+    path('details/<int:id>/', views.details, name="viewdetails"),
+    path('book/<int:id>/', views.check, name="check")
 ]
 
 

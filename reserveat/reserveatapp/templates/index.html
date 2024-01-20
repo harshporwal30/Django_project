@@ -44,7 +44,7 @@
                 <img class="imgcss" src="{{i.res_display.url}}" alt="Indian Restaurant 1">
                 <h3>{{ i.res_name }}</h3>
                 <p>{{i.res_description}}</p>
-                <a href="booking form.html">Book Table</a>
+                <a href="{% url 'viewdetails' i.id %}">Book Table</a>
             </div>
             {% endfor %}
         </div>
@@ -126,7 +126,7 @@
               </div>
         </div>
     </div>
-    {% else %}
+    {% elif msg %}
     <div class="alert-access">
       {{msg}}
       <a href="{% url 'login' %}">Login</a>

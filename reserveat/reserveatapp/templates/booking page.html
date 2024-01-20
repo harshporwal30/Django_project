@@ -1,0 +1,100 @@
+
+
+    {% extends 'nav-footer.html' %}
+    {% load static %}
+    
+    <html>
+    
+    <body>
+        {% block mycontent %}
+        {% if user %}  
+        <div class="hero1">
+          <h1>{{resobj.res_name}}</h1>
+            <p>Welcome to Amazing Restaurant, where every dish is a masterpiece!</p>
+            <p>Address: {{resobj.res_address}}</p>
+            <p>Contact: {{resobj.res_contact}}</p>
+            <p>Description: {{resobj.res_description}}</p>
+        </div>
+        
+        <div class="featured-tables">
+        <h1>Availabe Tables:</h1>
+        {% if msgs %}
+             <div class="alert-error">
+                 {{ msgs }}
+             </div>
+          {% endif %}
+        <div class="table-container">
+          
+          {% for i in tables %}
+          <div class="table">
+
+           
+            <h2>Table No: {{i.tableno}}</h2>
+            <span class="info">Table Location {{i.table_location}},
+              <br>Seating Capacity: {{i.seating_capacity}}
+             </span>
+             
+             <form method="post" action="{% url 'check' i.id %}">
+              {% csrf_token %}
+              <select name="time_slot" required>
+                  {% for slot in time_slots %}
+                      <option value="{{ slot.start_time }}-{{ slot.end_time }}">
+                          {{ slot.start_time }} - {{ slot.end_time }}
+                      </option>
+                  {% endfor %}
+              </select>
+              <button class="check-button" type="submit">Check Availability</button></form>
+          </div>
+          {% endfor %}
+          
+        </div>
+        <div class="image-container1" style="margin: 20px;">
+          <h1 style="margin-bottom: 15px;">Ambiance Images: </h1>
+          <div class="ambiance-images1">
+            {% for i in ambiance %}
+              <img class="ambiance-image1" src="{{i.image.url}}" alt="Ambiance Image 1">
+              {% endfor %}
+          </div>
+          <button class=" left-button" onclick="scrollImages('left')">←</button>
+          <button class=" right-button" onclick="scrollImages('right')">→</button>
+      </div>
+        <script>
+          const ambianceImages = document.querySelector('.ambiance-images1');
+          const images = document.querySelectorAll('.ambiance-image1');
+          let currentIndex = 0;
+      
+          function scrollImages(direction) {
+            const imageWidth = images[0].offsetWidth;
+            const maxIndex = images.length - 1;
+      
+            if (direction === 'left' && currentIndex > 0) {
+              currentIndex--;
+            } else if (direction === 'right' && currentIndex < maxIndex) {
+              currentIndex++;
+            }
+      
+            ambianceImages.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+          }
+      
+          document.addEventListener("DOMContentLoaded", function () {
+            function bookTable() {
+              alert("Table booked successfully!");
+            }
+          });
+        </script>
+      {% else %}
+      <div class="alert-access">
+        {{msg}}
+        <a href="{% url 'login' %}">Login</a>
+    </div>
+    {% endif %}
+  
+  
+  
+  
+      {% endblock %}
+    </body>
+    
+    </html>
+    
+  

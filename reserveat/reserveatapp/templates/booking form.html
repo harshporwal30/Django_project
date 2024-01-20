@@ -1,0 +1,77 @@
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Form</title>
+    <link rel="icon" type="image/png" href="Images/icon.PNG" sizes="32x32 64x64">
+    <link rel="stylesheet" href="{% static 'css/booking-form.css' %}">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="Home-Page.html">Home</a></li>
+                <li><a href="booking page.html">Book</a></li>
+
+                {% if user %}
+                <li><a href="#">Welcome {{ user.first_name }}</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="Login-Page.html">Login</a></li>
+                <li><a href="Signin-page.html">Sign In</a></li>
+                <li><a href="aim.html ">Our Aim</a></li>
+                {% endif %}
+
+                <li><a href="#aboutus">About Us</a></li>
+                <li><a href="#contactinfo">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Table Booking Form -->
+    <section class="booking-form">
+        <section class="table-booking-form">
+            <img src="/static/images/weblogo.png">
+            <form action="book_table.php" method="post">
+                <!-- Restaurant Selection -->
+                <label for="restaurant">Select a Restaurant:</label>
+                <select id="restaurant" name="restaurant">
+                    <option value="{{resobj.res_name}}">{{resobj.res_name}}</option>
+                </select>
+
+                <!-- Date and Time Selection -->
+                <label for="booking-date">Date:</label>
+                <input type="date" id="booking-date" name="booking-date" required>
+
+                <label for="booking-time">Time:</label>
+                <select name="time" required>
+                    
+                        <option value="{{time_slot}}">
+                            {{time_slot}}
+                        </option>
+                   
+                </select>
+
+                <!-- Number of Guests -->
+                <label for="guests">Number of Guests:</label>
+                <input type="number" id="guests" name="guests" min="1" required>
+
+                <!-- Table Selection -->
+                <label for="table">Select a Table:</label>
+                <select id="table" name="table">
+                    <option value="{{table.id}}">Table: {{table.tableno}}</option>
+                    
+
+                </select>
+
+                <!-- Submit Button -->
+                <button type="submit">Book Table</button>
+            </form>
+        </section>
+    </section>
+</body>
+
+</html>

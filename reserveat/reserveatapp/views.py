@@ -4,6 +4,8 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.utils import timezone
+from django.urls import reverse
+from django.http import QueryDict
 
 # Create your views here.
 def reg(request):
@@ -333,12 +335,43 @@ def login(request):
         
 
 
-def details(request):
+def details(request, id):
     if 'user' in request.session:
         userobj= request.session['user']
         cobj= users.objects.get(email=userobj)
-        resobj= restaurant.objects.all()
-        return render(request, 'resdetail.html', {'resobj': resobj, 'user': cobj})
+        resobj= restaurant.objects.get(id=id)
+        tableobj= tables.objects.filter(res_id_id=resobj.id)
+        ambobj= ambianceimg.objects.filter(resid_id=resobj.id)
+        time_slots = [
+            {'start_time': '09:00', 'end_time': '11:00'},
+            {'start_time': '12:00', 'end_time': '14:00'},
+            {'start_time': '22:00', 'end_time': '23:45'},
+        ]
+        error_message = request.GET.get('error_message', None)
+        return render(request, 'booking page.html', {'msgs': error_message,'resobj': resobj, 'user': cobj,'tables':tableobj, 'time_slots': time_slots, 'ambiance': ambobj})
     else:
             error_message = "Unauthorized Access."
             return {'msg': error_message}
+    
+
+def check(request, id):
+    if request.method == "POST":
+        
+        if 'user' in request.session:
+            userobj= request.session['user']
+            cobj= users.objects.get(email=userobj)
+
+            table_obj = tables.objects.get(id=id)
+            resid= table_obj.res_id.id
+            resobj= restaurant.objects.get(id= resid)
+            bookings_list = bookings.objects.filter(tableid_id=table_obj)
+
+            selected_time_slot = request.POST.get('time_slot')
+            start_time, end_time = selected_time_slot.split('-')
+
+            
+            if bookings_list.filter(start_time=start_time).exists():
+                error_message ="Table Not Available for Seletcted Time Slot"
+                return redirect(reverse('viewdetails', args=[resid]) + f'?error_message={error_message}')
+            else:
+                return render(request, 'booking form.html', { 'user': cobj, 'table': table_obj,'resobj':resobj ,'time_slot': selected_time_slot})
