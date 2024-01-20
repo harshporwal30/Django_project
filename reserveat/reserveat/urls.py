@@ -28,6 +28,7 @@ urlpatterns = [
     path('logout/', views.logout, name= "logout"),
     path('add/', views.addrestaurant, name="create"),
     path('add-ambiance/', views.addambiance, name="upld"),
+    path('addambiance/', views.otamb, name='otamb'),
     path('reg-table/', views.addtables, name="regtable"),
     path('tables/', views.tablelog, name="tables"),
     path('add-table/', views.rtables, name="addtable"),
@@ -35,11 +36,14 @@ urlpatterns = [
     path('manage-table/<int:id>/', views.managetable, name="managetable"),
     path('update/<int:id>', views.update, name="updttable"),
     path('administration/', views.reservationadm, name="res-administration"),
-    path('index/', views.rstrnt.as_view()),
+    path('index/', views.rstrnt),
     path('login/', views.login, name="login"),
     path('user-registration/', views.registration),
     path('update-res/<int:id>',views.updatres, name="updtres" ),
-    path('settings/', views.settings, name="settings")
+    path('settings/', views.settings, name="settings"),
+    path('viewgallery/', views.viewgallery),
+    path('delete/<int:id>/', views.deleteimg, name="deleteimg"),
+    path('details/', views.details, name="viewdetails")
 ]
 
 
