@@ -27,7 +27,7 @@ class tables(models.Model):
     tableno= models.IntegerField()
     seating_capacity= models.IntegerField()
     table_location= models.CharField(max_length=200, default="" )
-    booking_status= models.BooleanField(default= False)
+    booking_status= models.CharField(default= 'Not Booked', max_length=200)
     available= models.CharField(max_length= 200, default= True)
     class meta:
         db_table= 'tables'
