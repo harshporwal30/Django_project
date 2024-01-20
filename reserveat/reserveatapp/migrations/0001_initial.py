@@ -23,16 +23,7 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=250)),
             ],
         ),
-        migrations.CreateModel(
-            name='restaurant',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('res_name', models.CharField(max_length=200)),
-                ('res_address', models.CharField(max_length=500)),
-                ('res_contact', models.BigIntegerField()),
-                ('ownerid', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reserveatapp.resadmin')),
-            ],
-        ),
+        
         migrations.CreateModel(
             name='users',
             fields=[
@@ -45,38 +36,5 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=250)),
             ],
         ),
-        migrations.CreateModel(
-            name='tables',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tablename', models.CharField(default='', max_length=200)),
-                ('tableno', models.IntegerField()),
-                ('seating_capacity', models.IntegerField()),
-                ('table_location', models.CharField(default='', max_length=200)),
-                ('booking_status', models.BooleanField(default=False)),
-                ('available', models.CharField(default=True, max_length=200)),
-                ('res_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reserveatapp.restaurant')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='bookings',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now=True)),
-                ('booking_date', models.DateField()),
-                ('start_time', models.CharField(max_length=200)),
-                ('end_time', models.CharField(max_length=200)),
-                ('customerid', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reserveatapp.users')),
-                ('restaurantid', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reserveatapp.restaurant')),
-                ('tableid', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reserveatapp.tables')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='ambianceimg',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to='media')),
-                ('resid', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='reserveatapp.restaurant')),
-            ],
-        ),
+        
     ]
