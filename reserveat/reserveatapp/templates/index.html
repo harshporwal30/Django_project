@@ -5,7 +5,7 @@
 
 <body>
     {% block mycontent %}
-    {% if session %}
+    {% if user %}
     <!-- Hero div -->
     <div class="hero">
         <h1>Discover the Best Dining Experience</h1>
@@ -41,7 +41,7 @@
             <!-- Restaurant 1 -->
             {% for i in resobj %}
             <div class="restaurant">
-                <img class="imgcss" src="{{i.image.url}}" alt="Indian Restaurant 1">
+                <img class="imgcss" src="{{i.res_display.url}}" alt="Indian Restaurant 1">
                 <h3>{{ i.res_name }}</h3>
                 <p>{{i.res_description}}</p>
                 <a href="booking form.html">Book Table</a>

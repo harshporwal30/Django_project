@@ -423,28 +423,60 @@
     }
     
 .imgcss {
-    width: 100%;
+    margin-top: 2%;
+    margin-left: 2%;
     height: 200px;
     border-radius: 8px;
     object-fit: cover;
     object-position: center;
+    width: 100%;
   }
 
-  .edit-cancel-buttons {
-    display: flex;
-    justify-content: space-between;
+.img-column{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 2%;
+    margin-top: 2%;
 }
 
-.edit-cancel-buttons button {
-    padding: 10px;
+
+
+.image-container button {
+    padding: 8px;
     background-color: var(--accent-color);
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
+    
+    margin-top: 1.5%;
 }
 
 .edit-cancel-buttons button:hover {
     background-color: #ff3300;
+}
+
+.upload-buttons {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.image-container{
+    display: grid;
+    align-items: end;
+}
+.view-button {
+    display: block;
+   
+    margin-right: 5%;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    
 }

@@ -1,214 +1,214 @@
 /* Main Content style*/
 .main-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* css for adjusting content according to screen size*/
+@media screen and (max-width: 768px) {
+  .main-container {
+    grid-template-columns: 1fr;
   }
-  
-  /* css for adjusting content according to screen size*/
-  @media screen and (max-width: 768px) {
-    .main-container {
-      grid-template-columns: 1fr;
-    }
-  
-    /* for Adjust header and logo for small screens */
-    header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .logo {
-      margin-bottom: 10px;
-    }
-  
-    nav {
-      margin-top: 10px;
-    }
+
+  /* for Adjust header and logo for small screens */
+  header {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  /* Style for Hero div */
-  .hero {
-    position: relative;
-    color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    padding: 100px 0;
-    background-image: url('/static/images/herobg.jpg');
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 200px;
+
+  .logo {
+    margin-bottom: 10px;
   }
-  
-  /* Style for Featured Restaurants */
-  .featured-restaurants {
-    background-color: var(--secondary-bg-color);
-    padding: 20px;
-  }
-  
-  /* Responsive Grid for Featured Restaurants */
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-  
-  /* Individual Restaurant Card */
-  .restaurant {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    transition: transform 0.3s ease;
-  }
-  
-  .restaurant:hover {
-    transform: scale(1.03);
-  }
-  
-  .restaurant img {
-    width: 100%;
-    height: 200px;
-    border-radius: 8px;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  .restaurant h3 {
-    font-size: 20px;
+
+  nav {
     margin-top: 10px;
   }
-  
-  .restaurant p {
-    color: #555;
-  }
-  
-  .restaurant a {
-    display: inline-block;
-    background-color: var(--accent-color);
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .restaurant a:hover {
-    background-color: #ff3300;
-  }
-  
-  /* Style for Search and Filter Options */
-  .search-filter {
-    background-color: transparent;
-    width: 600px;
-    padding: 20px;
-    border-radius: 10px;
-    margin: auto;
-    margin-bottom: 20px;
-  }
-  
-  .search-filter h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .search-bar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    background-color: transparent;
-  }
-  
-  .search-bar input[type="text"] {
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: transparent;
-  }
-  
-  .search-bar button {
-    background-color: var(--accent-color);
-    color: #fff;
-    margin-left: 5px;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .search-bar button:hover {
-    background-color: #ff3300;
-  }
-  
-  .filter-options {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: transparent;
-    align-items: center;
-  }
-  
-  .filter-options label {
-    font-weight: bold;
-    margin-right: 10px;
-    background-color: transparent;
-  }
-  
-  .filter-options select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-    background-color: transparent;
-  }
-  
-  /* Style for Review div */
-  .reviews {
-    background-color: var(--secondary-bg-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .reviews h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  /* Style for review Grid */
-  .review-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-  }
-  
-  /* Style for Individual reviews */
-  .review {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  /* Style for review Text */
-  .review-text {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  /* Style for review Rating */
-  .review-rating {
-    color: #555;
-  }
-  
-  /* Style for Star Ratings */
-  .star-rating {
-    color: #ff9900;
-    font-size: 24px;
-  }
-  
-  /* Style for About Us div */
+}
+
+/* Style for Hero div */
+.hero {
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 100px 0;
+  background-image: url('/static/images/herobg.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 200px;
+}
+
+/* Style for Featured Restaurants */
+.featured-restaurants {
+  background-color: var(--secondary-bg-color);
+  padding: 20px;
+}
+
+/* Responsive Grid for Featured Restaurants */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Individual Restaurant Card */
+.restaurant {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.restaurant:hover {
+  transform: scale(1.03);
+}
+
+.restaurant img {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.restaurant h3 {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.restaurant p {
+  color: #555;
+}
+
+.restaurant a {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.restaurant a:hover {
+  background-color: #ff3300;
+}
+
+/* Style for Search and Filter Options */
+.search-filter {
+  background-color: transparent;
+  width: 600px;
+  padding: 20px;
+  border-radius: 10px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.search-filter h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: transparent;
+}
+
+.search-bar input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.search-bar button {
+  background-color: var(--accent-color);
+  color: #fff;
+  margin-left: 5px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #ff3300;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: transparent;
+  align-items: center;
+}
+
+.filter-options label {
+  font-weight: bold;
+  margin-right: 10px;
+  background-color: transparent;
+}
+
+.filter-options select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  background-color: transparent;
+}
+
+/* Style for Review div */
+.reviews {
+  background-color: var(--secondary-bg-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reviews h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Style for review Grid */
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+/* Style for Individual reviews */
+.review {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Style for review Text */
+.review-text {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Style for review Rating */
+.review-rating {
+  color: #555;
+}
+
+/* Style for Star Ratings */
+.star-rating {
+  color: #ff9900;
+  font-size: 24px;
+}
+
+/* Style for About Us div */
 .about-us {
   background-color: var(--secondary-bg-color);
   padding: 20px;
@@ -316,4 +316,111 @@
 
 .alert-access a:hover {
   background-color: #c53e2d;
+}
+
+
+/* restaurant details section */
+
+.restaurant-details {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.restaurant-details h1 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.restaurant-details p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.image-container1 {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.ambiance-images1 {
+  display: flex;
+  transition: transform 0.5s ease;
+  height: 300px;
+  width: 100%;
+}
+
+.ambiance-image1 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+.ambiance-image1:hover {
+  transform: scale(1.05);
+}
+
+.scroll-button {
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.left-button {
+  left: 10px;
+}
+
+.right-button {
+  right: 10px;
+}
+
+.table-section {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-section h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.table-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.table-list li {
+  margin-bottom: 10px;
+}
+
+.book-table-button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.book-table-button:hover {
+  background-color: #2079b0;
 }
