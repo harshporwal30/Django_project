@@ -13,6 +13,7 @@ class resadmin(models.Model):
 
 class restaurant(models.Model):
     ownerid= models.ForeignKey(resadmin, on_delete= models.CASCADE)
+    res_display= models.ImageField(upload_to="media", default= '')
     res_name= models.CharField(max_length= 200)
     res_address= models.CharField(max_length= 500)
     res_contact= models.BigIntegerField()
