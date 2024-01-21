@@ -1,0 +1,45 @@
+{% extends 'nav-footer.html' %}
+{% load static %}
+
+<html>
+
+<body>
+{% block mycontent %}
+  <div class="profile-container">
+
+
+    <div class="profile-section">
+      <h2>Personal Information</h2>
+      <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      
+    </div>
+
+    <div class="profile-section">
+      <h2>Contact Information</h2>
+      <p><strong>Phone:</strong> {{ user.phoneno }}</p>
+      <p><strong>Address:</strong> {{ user.address }}</p>
+      
+    </div>
+
+    <div class="profile-section">
+      <h2>Bookings</h2>
+      {% for bookings in booking %}
+      <div class="booking-item">
+        <p>{{ bookings.restaurantid.res_name }} - {{ bookings.booking_date }} at {{ bookings.start_time }} - Status: {{ bookings.booking_status }}</p>
+        <form method="post" action="{% url 'cancel-booking' %}">
+            {% csrf_token %}
+            <input type="hidden" name="booking_id" value="{{bookings.id}}">
+            {% if bookings.booking_status == 'Confirmed' %}
+            <button class="cancel-button">Cancel</button></form>
+            {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Add more sections as needed -->
+
+  </div>
+{% endblock %}
+</body>
+</html>

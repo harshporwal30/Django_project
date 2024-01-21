@@ -76,10 +76,10 @@
                                 <label for="table">Select Table:</label>
                                 <select name="table" required>
                                     {% for i in table %}
-                                    {% if not i.booking_status %}
+                                    {% if i.booking_status != "Booked" %}
                                     <option value=
                                     {{i.tableno}}
-                                    >Table {{i.tableno}}</option>
+                                    >Table {{i.tableno}}- {{i.tablename}}</option>
                                     {% endif %}
                                     {% endfor %}
                                     
@@ -110,10 +110,10 @@
 
                                         <td>{{i.seating_capacity}}</td>
                                         <td>
-                                            {% if i.booking_status %}
-                                            Booked
-                                            {% else %}
+                                            {% if i.booking_status != "Booked" %}
                                             Availabe
+                                            {% else %}
+                                            Booked
                                             {% endif %}
                                         </td>
 

@@ -39,6 +39,7 @@
                             <thead>
                                 <tr>
                                     <th>Table Number</th>
+                                    <th>Table Name</th>
                                     <th>Location</th>
                                     <th>Capacity</th>
                                     <th>Status</th>
@@ -51,15 +52,16 @@
                                 <tr>
 
                                     <td>{{i.tableno}}</td>
+                                    <td>{{i.tablename}}</td>
                                     <td>{{i.table_location}}</td>
                                     <td>{{i.seating_capacity}}</td>
-                                    <td>{% if i.booking_status %}
-                                        Booked
-                                        {% else %}
+                                    <td>{% if i.booking_status != "Booked" %}
                                         Availabe
+                                        {% else %}
+                                        Booked
                                         {% endif %}</td>
                                     <td>{{i.available}}</td>
-                                    <td><a href="{% url 'managetable' i.id %}">Manage</a></td>
+                                    <td><i class="fa fa-pencil" aria-hidden="true"></i>  <a href="{% url 'managetable' i.id %}" style="text-decoration: none; color: #333;">Manage</a></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

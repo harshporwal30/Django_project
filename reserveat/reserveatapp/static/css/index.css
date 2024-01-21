@@ -350,12 +350,12 @@
   filter: blur(2px);}
 
 .hero1 h1 {
-  color: #ccc;
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
 .hero1 p {
-  color: #ccc;
+  color: #ffffff;
   margin-bottom: 30px;
 }
 
@@ -388,7 +388,7 @@
 
 .left-button, .right-button {
   position: absolute;
-  top: 125%;
+  top: 160%;
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
@@ -563,10 +563,12 @@
 
 .hero1 {
   position: relative;
-  color: rgba(255, 255, 255, 0.8);
-  padding: 100px 0;
   
-  width: 100%;
+  padding-top: 75px;
+  padding-bottom: 130px;
+  padding-left: 50px;
+  background-color: rgba(6, 6, 6, 0.377);
+  
   height: 200px;
 }
 
@@ -581,7 +583,7 @@
   background-image: url('/static/images/res-1.jpg');
   background-size: cover;
   background-position: center;
-  filter: blur(2px);}
+  filter: blur(4px);}
 
   .alert-error {
     font-size: smaller;
@@ -592,5 +594,115 @@
     color: #e64a2b;
 }
 
+.konsa-button{
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
 
-/* booking form css */
+.konsa-button:hover{
+  background-color: #e64a2b;
+}
+/* select button css */
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px; 
+}
+.select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px; 
+}
+
+/* Style for the dropdown arrow */
+select::after {
+  content: '\25BC'; 
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  pointer-events: none;
+}
+
+/* Style for the dropdown options */
+select option {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Style for the hover effect on options */
+select option:hover {
+  background-color: #f0f0f0;
+}
+
+
+
+.booking-summary-container {
+  
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.booking-details, 
+.confirmation-message {
+  margin-bottom: 20px;
+}
+
+
+
+
+/* profile css */
+
+.profile-container {
+  
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-section {
+  margin-bottom: 30px;
+}
+
+.booking-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  
+  align-items: center;
+}
+
+.cancel-button {
+  background-color: #e64a2b;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 3%;
+}
+
+.cancel-button:hover {
+  background-color: #c53e2d;
+}

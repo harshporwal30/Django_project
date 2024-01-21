@@ -36,15 +36,19 @@ urlpatterns = [
     path('manage-table/<int:id>/', views.managetable, name="managetable"),
     path('update/<int:id>', views.update, name="updttable"),
     path('administration/', views.reservationadm, name="res-administration"),
-    path('index/', views.rstrnt),
+    path('index/', views.rstrnt, name="index"),
     path('login/', views.login, name="login"),
-    path('user-registration/', views.registration),
+    path('user-registration/', views.registration, name= 'uregister'),
     path('update-res/<int:id>',views.updatres, name="updtres" ),
     path('settings/', views.settings, name="settings"),
     path('viewgallery/', views.viewgallery),
     path('delete/<int:id>/', views.deleteimg, name="deleteimg"),
     path('details/<int:id>/', views.details, name="viewdetails"),
-    path('book/<int:id>/', views.check, name="check")
+    path('book/<int:id>/', views.check, name="check"),
+    path('book-table/', views.book, name="booktable"),
+    path('summary/<str:bid>/', views.summary, name="summary"),
+    path('profile/', views.profile, name="profile"),
+    path('cancel-booking/', views.cancelbooking, name="cancel-booking")
 ]
 
 

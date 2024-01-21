@@ -14,18 +14,18 @@
     <header>
         <nav>
             <ul>
-                <li><a href="Home-Page.html">Home</a></li>
-                <li><a href="booking page.html">Book</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
+        
 
                 {% if user %}
-                <li><a href="#">Welcome {{ user.first_name }}</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'profile' %}">Welcome {{ user.first_name }}</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
-                <li><a href="Login-Page.html">Login</a></li>
-                <li><a href="Signin-page.html">Sign In</a></li>
-                <li><a href="aim.html ">Our Aim</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'uregister' %}">Sign In</a></li>
+                    <li><a href="aim.html ">Our Aim</a></li>
                 {% endif %}
-
+                
                 <li><a href="#aboutus">About Us</a></li>
                 <li><a href="#contactinfo">Contact Us</a></li>
             </ul>
@@ -35,11 +35,12 @@
     <section class="booking-form">
         <section class="table-booking-form">
             <img src="/static/images/weblogo.png">
-            <form action="book_table.php" method="post">
+            <form action="{% url 'booktable' %}" method="post">
+                {% csrf_token %}
                 <!-- Restaurant Selection -->
                 <label for="restaurant">Select a Restaurant:</label>
                 <select id="restaurant" name="restaurant">
-                    <option value="{{resobj.res_name}}">{{resobj.res_name}}</option>
+                    <option value="{{resobj.id}}">{{resobj.res_name}}</option>
                 </select>
 
                 <!-- Date and Time Selection -->
@@ -57,12 +58,12 @@
 
                 <!-- Number of Guests -->
                 <label for="guests">Number of Guests:</label>
-                <input type="number" id="guests" name="guests" min="1" required>
+                <input type="number" id="guests" name="guests" min="1" placeholder="For {{table.seating_capacity}} Persons" required>
 
                 <!-- Table Selection -->
                 <label for="table">Select a Table:</label>
                 <select id="table" name="table">
-                    <option value="{{table.id}}">Table: {{table.tableno}}</option>
+                    <option value="{{table.id}}">Table: {{table.tableno}}- {{table.tablename}}</option>
                     
 
                 </select>

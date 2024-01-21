@@ -44,6 +44,7 @@
                 <img class="imgcss" src="{{i.res_display.url}}" alt="Indian Restaurant 1">
                 <h3>{{ i.res_name }}</h3>
                 <p>{{i.res_description}}</p>
+                <p><i class="fa fa-map-marker" aria-hidden="true"></i>  {{i.res_address}}</p>
                 <a href="{% url 'viewdetails' i.id %}">Book Table</a>
             </div>
             {% endfor %}
@@ -132,6 +133,10 @@
       <a href="{% url 'login' %}">Login</a>
   </div>
   {% endif %}
+
+  <script>
+    
+  </script>
     {% endblock %}
 </body>
 

@@ -1,0 +1,145 @@
+{% load static %}
+
+<html>
+
+<head>
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/nav-footer.css' %}">
+</head>
+
+
+<body>
+   <!-- Include the PayPal JavaScript SDK -->
+   <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+    
+   <script>
+       var amount= 333333 // {{tableobj.price}}
+       console.log(amount)
+    function initPayPalButton() {
+       document.getElementById("paypapl").style.visibility ="hidden";
+paypal.Buttons({
+
+ style: {
+
+   shape: 'rect',
+
+   color: 'gold',
+
+   layout: 'vertical',
+
+   label: 'paypal',
+  
+
+ },
+
+
+ createOrder: function(data, actions) {
+
+   return actions.order.create({
+
+     purchase_units: [{"amount":{"currency_code":"USD","value":amount}}]
+
+   });
+
+ },
+
+
+ onApprove: function(data, actions) {
+
+   return actions.order.capture().then(function(orderData) {
+
+    console.log(orderData)
+
+     // Full available details
+
+     console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                 var data = orderData['id']
+       //           var f = document.createElement('form');
+       // f.action='http://localhost:8000/paymentsucess/';
+       // f.method='GET';
+       // f.target='_blank';
+
+       // var i=document.createElement('input');
+       // i.type='hidden';
+       // i.name='fragment';
+       // i.value=orderData['id'];
+       // f.appendChild(i);
+
+       // document.body.appendChild(f);
+
+       // f.submit();
+       odata = 123;
+    window.location.replace("paymentsucess/"+data+"/"+odata+"/");     
+
+   });
+
+ },
+
+
+ onError: function(err) {
+
+   console.log(err);
+
+ }
+
+}).render('#paypal-button-container');
+
+}
+
+</script>
+<div>
+  <header>
+    <div class="logo">
+      <img src="{% static 'images/weblogo.png' %}" alt="Restaurant Booking Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+
+
+        {% if user %}
+        <li><a href="{% url 'profile' %}">Welcome {{ user.first_name }}</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'uregister' %}">Sign In</a></li>
+        <li><a href="aim.html ">Our Aim</a></li>
+        {% endif %}
+
+        <li><a href="#aboutus">About Us</a></li>
+        <li><a href="#contactinfo">Contact Us</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  {% if user %}
+   
+  <div class="booking-summary-container">
+    <h1>Booking Summary</h1>
+
+    <div class="booking-details">
+      <h2>Booking Information</h2>
+      <p><strong>Booking ID:</strong> {{booking.bookingid}}</p>
+      <p><strong>Name:</strong> {{booking.customerid.first_name}}</p>
+      <p><strong>Email:</strong> {{booking.customerid.email}}</p>
+      <p><strong>Contact Number:</strong> {{booking.customerid.phoneno}}</p>
+      <p><strong>Date:</strong>{{booking.booking_date}}</p>
+      <p><strong>Time:</strong> {{booking.start_time}}-{{booking.end_time}}</p>
+      <p><strong>Table Number:</strong>{{booking.tableid.tableno}}</p>
+    </div>
+
+    <div class="confirmation-message">
+      <h2>Confirmation</h2>
+      <p>Your reservation has been confirmed. We look forward to serving you!</p>
+      <div class="sale my-3"> <div id="paypal-button-container"></div> </div>
+                 
+      <button onclick="initPayPalButton()" name="paypapl" id="paypapl">Do payment</button>
+    </div>      <a href="{% url 'index' %}">Go to Home</a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+</body>
+
+</html>

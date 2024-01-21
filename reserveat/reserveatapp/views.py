@@ -6,6 +6,9 @@ from django.views.generic import ListView, UpdateView, DeleteView
 from django.utils import timezone
 from django.urls import reverse
 from django.http import QueryDict
+import string
+import random
+from datetime import datetime
 
 # Create your views here.
 def reg(request):
@@ -63,8 +66,12 @@ def dashboard(request):
             tableobj= tables.objects.filter(res_id_id=robj)
             time_slots = [
             {'start_time': '09:00', 'end_time': '11:00'},
-            {'start_time': '12:00', 'end_time': '14:00'},
-            {'start_time': '22:00', 'end_time': '23:45'},
+            {'start_time': '11:00', 'end_time': '13:00'},
+            {'start_time': '13:00', 'end_time': '15:00'},
+            {'start_time': '15:00', 'end_time': '17:00'},
+            {'start_time': '17:00', 'end_time': '19:00'},
+            {'start_time': '19:00', 'end_time': '21:00'},
+            {'start_time': '21:00', 'end_time': '22:00'}
         ]
             return render(request, 'dashboard.html', {'user': adminobj, 'restaurant': robj, "table": tableobj, 'time_slots':time_slots})
         else:
@@ -164,7 +171,7 @@ def reserve(request):
         tableobj= tables.objects.get(res_id_id=resobj, tableno= tno)
         cobj= users.objects.get(email= cemail)
         bookingobj= bookings(restaurantid= resobj, tableid= tableobj, customerid= cobj, booking_date= rdate, start_time= start_time_str, end_time= end_time_str)
-        tableobj.booking_status= "Confirmed"
+        tableobj.booking_status= "Booked"
         tableobj.available= False
         bookingobj.save()
         tableobj.save()
@@ -199,8 +206,12 @@ def reservationadm(request):
         resobj= restaurant.objects.get(ownerid_id=adminobj.id)
         time_slots = [
             {'start_time': '09:00', 'end_time': '11:00'},
-            {'start_time': '12:00', 'end_time': '14:00'},
-            {'start_time': '22:00', 'end_time': '23:45'},
+            {'start_time': '11:00', 'end_time': '13:00'},
+            {'start_time': '13:00', 'end_time': '15:00'},
+            {'start_time': '15:00', 'end_time': '17:00'},
+            {'start_time': '17:00', 'end_time': '19:00'},
+            {'start_time': '19:00', 'end_time': '21:00'},
+            {'start_time': '21:00', 'end_time': '22:00'}
         ]
 
         selected_time_slot = request.POST.get('time_slot')
@@ -344,8 +355,12 @@ def details(request, id):
         ambobj= ambianceimg.objects.filter(resid_id=resobj.id)
         time_slots = [
             {'start_time': '09:00', 'end_time': '11:00'},
-            {'start_time': '12:00', 'end_time': '14:00'},
-            {'start_time': '22:00', 'end_time': '23:45'},
+            {'start_time': '11:00', 'end_time': '13:00'},
+            {'start_time': '13:00', 'end_time': '15:00'},
+            {'start_time': '15:00', 'end_time': '17:00'},
+            {'start_time': '17:00', 'end_time': '19:00'},
+            {'start_time': '19:00', 'end_time': '21:00'},
+            {'start_time': '21:00', 'end_time': '22:00'}
         ]
         error_message = request.GET.get('error_message', None)
         return render(request, 'booking page.html', {'msgs': error_message,'resobj': resobj, 'user': cobj,'tables':tableobj, 'time_slots': time_slots, 'ambiance': ambobj})
@@ -365,13 +380,67 @@ def check(request, id):
             resid= table_obj.res_id.id
             resobj= restaurant.objects.get(id= resid)
             bookings_list = bookings.objects.filter(tableid_id=table_obj)
-
+            tdate= request.POST.get('date')
             selected_time_slot = request.POST.get('time_slot')
             start_time, end_time = selected_time_slot.split('-')
 
             
-            if bookings_list.filter(start_time=start_time).exists():
+            if bookings_list.filter(start_time=start_time, booking_date=tdate, booking_status = "Confirmed").exists():
                 error_message ="Table Not Available for Seletcted Time Slot"
                 return redirect(reverse('viewdetails', args=[resid]) + f'?error_message={error_message}')
             else:
                 return render(request, 'booking form.html', { 'user': cobj, 'table': table_obj,'resobj':resobj ,'time_slot': selected_time_slot})
+
+def book(request):
+    if request.method== "POST":
+        userobj= request.session['user']
+        cobj= users.objects.get(email=userobj)
+        rname= request.POST['restaurant']
+        rdate= request.POST['booking-date']
+        rtime= request.POST['time']
+        rguess= request.POST.get('guests')
+        rtable= request.POST.get('table')
+        start_time, end_time= rtime.split("-")
+        bookingobj= bookings(restaurantid_id= rname, tableid_id= rtable,customerid_id= cobj.id, booking_date= rdate, start_time= start_time, end_time= end_time, booking_status= "Confirmed" )
+        bookingobj.save()
+        string.ascii_letters=  'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        a= random.choice(string.ascii_letters)
+        bid=  a + str(cobj.id) + str(rdate) 
+        bookingobj.bookingid= bid
+        bookingobj.save()
+        tableobj= tables.objects.get(id= rtable)
+        tableobj.booking_status= "Pending"
+        tableobj.save()
+        url = reverse('summary', args=[bid])
+        
+        return redirect(url)
+    
+def summary(request, bid):
+    userobj= request.session['user']
+    cobj= users.objects.get(email=userobj)
+    new_booking= bookings.objects.get(bookingid= bid)
+    return render (request, 'summary.html', {'booking': new_booking, 'user': cobj})
+
+def profile(request):
+    userobj= request.session['user']
+    cobj= users.objects.get(email=userobj)
+    booking= bookings.objects.filter(customerid_id= cobj.id)
+    return render(request, 'profile.html',{'user': cobj, 'booking': booking})
+
+def cancelbooking(request):
+    if request.method== "POST":
+        userobj= request.session['user']
+        cobj= users.objects.get(email=userobj)
+        booking= bookings.objects.filter(customerid_id= cobj.id)
+        a= request.POST.get('booking_id')
+        bkobj= bookings.objects.get(id=a)
+
+        tbl= tables.objects.get(id= bkobj.tableid.id)
+        print(tbl)
+        tbl.booking_status = "Not Booked"
+        tbl.save()
+        bookingobj= bookings.objects.get(id= a)
+        bookingobj.booking_status= "Cancelled"
+        bookingobj.save()
+        url= reverse('profile')
+        return redirect(url)

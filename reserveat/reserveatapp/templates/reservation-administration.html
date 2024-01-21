@@ -55,6 +55,8 @@
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Booked At</th>
+                                <th>Booking Status</th>
+
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -65,6 +67,7 @@
                                 <td>{{i.booking_date}}</td>
                                 <td>{{i.start_time}}</td>
                                 <td>{{i.created_at}}</td>
+                                <td>{{i.booking_status}}</td>
                                 <td><button>Edit</button> <button>Cancel</button></td>
                             </tr>
                             {% endfor %}

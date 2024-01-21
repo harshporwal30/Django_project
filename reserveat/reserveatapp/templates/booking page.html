@@ -9,17 +9,17 @@
         {% block mycontent %}
         {% if user %}  
         <div class="hero1">
-          <h1>{{resobj.res_name}}</h1>
-            <p>Welcome to Amazing Restaurant, where every dish is a masterpiece!</p>
-            <p>Address: {{resobj.res_address}}</p>
-            <p>Contact: {{resobj.res_contact}}</p>
-            <p>Description: {{resobj.res_description}}</p>
+          <h1 style="font-size: 47px;">{{resobj.res_name}}</h1>
+          <p style="font-size: 20px;">{{resobj.res_description}}</p>
+            <p style="font-size: 18px;"><i class="fa fa-map-marker" aria-hidden="true"></i> Address: {{resobj.res_address}}</p>
+            <p style="font-size: 18px;"><i class="fa fa-phone" aria-hidden="true"></i>  Contact: {{resobj.res_contact}}</p>
+            
         </div>
         
         <div class="featured-tables">
-        <h1>Availabe Tables:</h1>
+        <h1>Available Tables:</h1>
         {% if msgs %}
-             <div class="alert-error">
+             <div class="alert-error" style="font-size: large;">
                  {{ msgs }}
              </div>
           {% endif %}
@@ -29,13 +29,14 @@
           <div class="table">
 
            
-            <h2>Table No: {{i.tableno}}</h2>
-            <span class="info">Table Location {{i.table_location}},
+            <h2>{{i.tablename}}</h2>
+            <span class="info">Table Location: {{i.table_location}}
               <br>Seating Capacity: {{i.seating_capacity}}
              </span>
              
              <form method="post" action="{% url 'check' i.id %}">
               {% csrf_token %}
+              <input class="select" type="date" name="date" value="{% now 'Y-m-d' %}">
               <select name="time_slot" required>
                   {% for slot in time_slots %}
                       <option value="{{ slot.start_time }}-{{ slot.end_time }}">

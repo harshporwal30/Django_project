@@ -29,6 +29,7 @@ class tables(models.Model):
     table_location= models.CharField(max_length=200, default="" )
     booking_status= models.CharField(default= 'Not Booked', max_length=200)
     available= models.CharField(max_length= 200, default= True)
+    price= models.IntegerField(default= 0)
     class meta:
         db_table= 'tables'
 
@@ -50,6 +51,7 @@ class users(models.Model):
 
 
 class bookings(models.Model):
+    bookingid= models.CharField(max_length= 200, default= "")
     restaurantid= models.ForeignKey(restaurant, on_delete= models.CASCADE)
     tableid= models.ForeignKey(tables, on_delete= models.CASCADE)
     customerid= models.ForeignKey(users, on_delete= models.CASCADE)
@@ -57,6 +59,9 @@ class bookings(models.Model):
     booking_date= models.DateField()
     start_time= models.CharField(max_length= 200)
     end_time= models.CharField(max_length= 200)
+    booking_status= models.CharField(max_length= 200, default= 'Confirmed')
+    payment_model= models.CharField(max_length= 200, default= 'PayPal')
+    transaction_id= models.CharField(max_length= 200, default= '')
     class meta:
         db_table= 'bookings'
 

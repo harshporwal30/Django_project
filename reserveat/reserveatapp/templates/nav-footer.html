@@ -24,15 +24,15 @@
     </div>
     <nav>
       <ul>
-        <li><a href="Home-Page.html">Home</a></li>
-        <li><a href="booking page.html">Book</a></li>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        
 
         {% if user %}
-            <li><a href="#">Welcome {{ user.first_name }}</a></li>
+            <li><a href="{% url 'profile' %}">Welcome {{ user.first_name }}</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
         {% else %}
-            <li><a href="Login-Page.html">Login</a></li>
-            <li><a href="Signin-page.html">Sign In</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'uregister' %}">Sign In</a></li>
             <li><a href="aim.html ">Our Aim</a></li>
         {% endif %}
         
@@ -72,8 +72,8 @@
     <div class="legal">
       <h3>Legal Information</h3>
       <ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#"style="text-decoration: none; margin-left: 5px; margin-top: 3px; color: #555;'">Privacy Policy</a></li>
+        <li><a href="#"style="text-decoration: none; margin-left: 5px; margin-top: 3px; color: #555;">Terms of Service</a></li>
       </ul>
     </div>
   </div>
