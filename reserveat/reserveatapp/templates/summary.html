@@ -13,80 +13,48 @@
    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     
    <script>
-       var amount= 333333 // {{tableobj.price}}
-       console.log(amount)
-    function initPayPalButton() {
-       document.getElementById("paypapl").style.visibility ="hidden";
-paypal.Buttons({
+       var amount = {{tableobj.price}};
+        var bookingId = "{{booking.bookingid}}";
 
- style: {
+        function initPayPalButton() {
+            document.getElementById("paypapl").style.visibility ="hidden";
+    paypal.Buttons({
+    
+      style: {
+    
+        shape: 'rect',
+    
+        color: 'gold',
+    
+        layout: 'vertical',
+    
+        label: 'paypal',
+    
+       
+    
+      },
 
-   shape: 'rect',
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{ "amount": { "currency_code": "USD", "value": amount } }]
+                    });
+                },
 
-   color: 'gold',
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (orderData) {
+                        var transactionId = orderData.id;
+                        // Redirect to the paymentsuccess view with the transactionId and bookingId
+                        window.location.replace("http://127.0.0.1:8000/paymentsucess/"+transactionId+"/"+bookingId);
+                    });
+                },
 
-   layout: 'vertical',
+                onError: function (err) {
+                    console.log(err);
+                }
 
-   label: 'paypal',
-  
-
- },
-
-
- createOrder: function(data, actions) {
-
-   return actions.order.create({
-
-     purchase_units: [{"amount":{"currency_code":"USD","value":amount}}]
-
-   });
-
- },
-
-
- onApprove: function(data, actions) {
-
-   return actions.order.capture().then(function(orderData) {
-
-    console.log(orderData)
-
-     // Full available details
-
-     console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                 var data = orderData['id']
-       //           var f = document.createElement('form');
-       // f.action='http://localhost:8000/paymentsucess/';
-       // f.method='GET';
-       // f.target='_blank';
-
-       // var i=document.createElement('input');
-       // i.type='hidden';
-       // i.name='fragment';
-       // i.value=orderData['id'];
-       // f.appendChild(i);
-
-       // document.body.appendChild(f);
-
-       // f.submit();
-       odata = 123;
-    window.location.replace("paymentsucess/"+data+"/"+odata+"/");     
-
-   });
-
- },
-
-
- onError: function(err) {
-
-   console.log(err);
-
- }
-
-}).render('#paypal-button-container');
-
-}
-
-</script>
+            }).render('#paypal-button-container');
+        }
+    </script>
 <div>
   <header>
     <div class="logo">
@@ -110,11 +78,11 @@ paypal.Buttons({
         <li><a href="#contactinfo">Contact Us</a></li>
       </ul>
     </nav>
-
+ 
   </header>
 
   {% if user %}
-   
+  
   <div class="booking-summary-container">
     <h1>Booking Summary</h1>
 
@@ -130,12 +98,13 @@ paypal.Buttons({
     </div>
 
     <div class="confirmation-message">
-      <h2>Confirmation</h2>
-      <p>Your reservation has been confirmed. We look forward to serving you!</p>
-      <div class="sale my-3"> <div id="paypal-button-container"></div> </div>
-                 
+      <div class="sale my-3"> 
+        <div id="paypal-button-container">
+        </div>
+      </div>                 
       <button onclick="initPayPalButton()" name="paypapl" id="paypapl">Do payment</button>
-    </div>      <a href="{% url 'index' %}">Go to Home</a>
+    </div>      
+    <a href="{% url 'index' %}">Go to Home</a>
     </div>
   </div>
   {% endif %}

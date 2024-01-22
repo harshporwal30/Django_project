@@ -401,25 +401,29 @@ def book(request):
         rguess= request.POST.get('guests')
         rtable= request.POST.get('table')
         start_time, end_time= rtime.split("-")
-        bookingobj= bookings(restaurantid_id= rname, tableid_id= rtable,customerid_id= cobj.id, booking_date= rdate, start_time= start_time, end_time= end_time, booking_status= "Confirmed" )
+        bookingobj= bookings(restaurantid_id= rname, tableid_id= rtable,customerid_id= cobj.id, booking_date= rdate, start_time= start_time, end_time= end_time, booking_status= "Pending" )
         bookingobj.save()
         string.ascii_letters=  'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
         a= random.choice(string.ascii_letters)
-        bid=  a + str(cobj.id) + str(rdate) 
+        bid1=  a + str(cobj.id) + str(rdate) 
+        bid= bid1.replace('-', '')
         bookingobj.bookingid= bid
         bookingobj.save()
+        book1= bookings.objects.get(bookingid= bid)
         tableobj= tables.objects.get(id= rtable)
         tableobj.booking_status= "Pending"
         tableobj.save()
-        url = reverse('summary', args=[bid])
-        
-        return redirect(url)
+        table1= tables.objects.get(id= rtable)
+
+        return render (request, 'summary.html', {'booking': book1, 'user': cobj, 'tableobj': table1})
     
 def summary(request, bid):
     userobj= request.session['user']
     cobj= users.objects.get(email=userobj)
     new_booking= bookings.objects.get(bookingid= bid)
-    return render (request, 'summary.html', {'booking': new_booking, 'user': cobj})
+    print(new_booking.bookingid)
+    table1= tables.objects.get(id= new_booking.tableid_id)
+    return render (request, 'summary.html', {'booking': new_booking, 'user': cobj, 'tableobj': table1})
 
 def profile(request):
     userobj= request.session['user']
@@ -444,3 +448,17 @@ def cancelbooking(request):
         bookingobj.save()
         url= reverse('profile')
         return redirect(url)
+    
+
+def paymentsuccess(request, tid, orderid):
+    userobj= request.session['user']
+    cobj= users.objects.get(email=userobj)
+    booking= bookings.objects.filter(customerid_id= cobj.id)
+    bkobj= bookings.objects.get(bookingid= orderid)
+    bkobj.booking_status= "Confirmed"
+    bkobj.transaction_id= tid
+    bkobj.save()
+    tbl= tables.objects.get(id= bkobj.tableid.id)
+    tbl.booking_status= "Booked"
+    tbl.save()
+    return render(request, 'paymentsuccess.html', {'bk': bkobj, 'user': cobj, 'booking': booking})

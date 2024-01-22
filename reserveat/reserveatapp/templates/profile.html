@@ -27,6 +27,9 @@
       {% for bookings in booking %}
       <div class="booking-item">
         <p>{{ bookings.restaurantid.res_name }} - {{ bookings.booking_date }} at {{ bookings.start_time }} - Status: {{ bookings.booking_status }}</p>
+        {% if bookings.booking_status == 'Pending' %}
+        <a class="cancel-button" href="{% url 'summary' bookings.bookingid %}">Complete Payment</a>
+        {% endif %}
         <form method="post" action="{% url 'cancel-booking' %}">
             {% csrf_token %}
             <input type="hidden" name="booking_id" value="{{bookings.id}}">
