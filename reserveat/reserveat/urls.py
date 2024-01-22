@@ -48,7 +48,9 @@ urlpatterns = [
     path('book-table/', views.book, name="booktable"),
     path('summary/<str:bid>/', views.summary, name="summary"),
     path('profile/', views.profile, name="profile"),
-    path('cancel-booking/', views.cancelbooking, name="cancel-booking")
+    path('cancel-booking/', views.cancelbooking, name="cancel-booking"),
+    path('paymentsucess/<str:tid>/<str:orderid>', views.paymentsuccess, name='paymentsuccess'),
+    
 ]
 
 
