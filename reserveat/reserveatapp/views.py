@@ -389,7 +389,7 @@ def check(request, id):
                 error_message ="Table Not Available for Seletcted Time Slot"
                 return redirect(reverse('viewdetails', args=[resid]) + f'?error_message={error_message}')
             else:
-                return render(request, 'booking form.html', { 'user': cobj, 'table': table_obj,'resobj':resobj ,'time_slot': selected_time_slot})
+                return render(request, 'booking form.html', { 'user': cobj, 'table': table_obj,'resobj':resobj ,'time_slot': selected_time_slot, 'tdate': tdate})
 
 def book(request):
     if request.method== "POST":
@@ -411,8 +411,6 @@ def book(request):
         bookingobj.save()
         book1= bookings.objects.get(bookingid= bid)
         tableobj= tables.objects.get(id= rtable)
-        tableobj.booking_status= "Pending"
-        tableobj.save()
         table1= tables.objects.get(id= rtable)
 
         return render (request, 'summary.html', {'booking': book1, 'user': cobj, 'tableobj': table1})
@@ -448,7 +446,25 @@ def cancelbooking(request):
         bookingobj.save()
         url= reverse('profile')
         return redirect(url)
-    
+
+
+def cancelpament(request):
+    if request.method== "POST":
+        userobj= request.session['user']
+        cobj= users.objects.get(email=userobj)
+        booking= bookings.objects.filter(customerid_id= cobj.id)
+        a= request.POST.get('booking_id')
+        bkobj= bookings.objects.get(id=a)
+
+        tbl= tables.objects.get(id= bkobj.tableid.id)
+        print(tbl)
+        tbl.booking_status = "Not Booked"
+        tbl.save()
+        bookingobj= bookings.objects.get(id= a)
+        bookingobj.booking_status= "Cancelled"
+        bookingobj.save()
+        url= reverse('profile')
+        return redirect(url)
 
 def paymentsuccess(request, tid, orderid):
     userobj= request.session['user']

@@ -45,7 +45,13 @@
 
                 <!-- Date and Time Selection -->
                 <label for="booking-date">Date:</label>
-                <input type="date" id="booking-date" name="booking-date" required>
+                <select name="booking-date" required>
+                    
+                    <option value="{{tdate}}">
+                        {{tdate}}
+                    </option>
+               
+            </select>
 
                 <label for="booking-time">Time:</label>
                 <select name="time" required>

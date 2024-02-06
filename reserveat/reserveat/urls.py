@@ -50,6 +50,8 @@ urlpatterns = [
     path('profile/', views.profile, name="profile"),
     path('cancel-booking/', views.cancelbooking, name="cancel-booking"),
     path('paymentsucess/<str:tid>/<str:orderid>', views.paymentsuccess, name='paymentsuccess'),
+    path('cancel-payment/', views.cancelpament, name="cancel-payment"),
+
     
 ]
 

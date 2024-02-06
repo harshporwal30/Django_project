@@ -694,7 +694,7 @@ select option:hover {
 }
 
 .cancel-button {
-  background-color: #e64a2b;
+  background-color: #ff5500;
   color: #fff;
   border: none;
   padding: 8px 12px;
@@ -704,7 +704,7 @@ select option:hover {
 }
 
 .cancel-button:hover {
-  background-color: #c53e2d;
+  background-color: #ff3300;
 }
 
 .alert-success {
