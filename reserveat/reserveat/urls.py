@@ -23,7 +23,7 @@ from reserveatapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('registration/', views.reg, name='adminreg'),
-    path('adlogin/', views.adminlogin, name='adminlogin'),
+    path('admin-login/', views.adminlogin, name='adminlogin'),
     path('dashboard/', views.dashboard,name="dashboard"),
     path('logout/', views.logout, name= "logout"),
     path('add/', views.addrestaurant, name="create"),
@@ -51,6 +51,9 @@ urlpatterns = [
     path('cancel-booking/', views.cancelbooking, name="cancel-booking"),
     path('paymentsucess/<str:tid>/<str:orderid>', views.paymentsuccess, name='paymentsuccess'),
     path('cancel-payment/', views.cancelpament, name="cancel-payment"),
+    path('search/', views.search_restaurants, name='search_restaurants'),
+    path('filter-by-location/<str:location>/', views.locationfilter, name='paymentsuccess'),
+
 
     
 ]
