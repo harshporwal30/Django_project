@@ -36,9 +36,13 @@
     </header>
   
     {% if user %}
+    <div class="invoice-container">
+      <div class="invoice-header">
+        <h1>Invoice</h1>
+      </div>
+  
+      
     
-    <div class="booking-summary-container">
-      <h1>Booking Summary</h1>
   
       <div class="booking-details">
         <h2>Booking Information</h2>
@@ -60,7 +64,7 @@
                 </div>
                 {% endif %}
              
-        <a href="{% url 'index' %}">Go to Home</a>
+        <a href="{% url 'index' %}" class="cancel-button" style="text-decoration: none;">Go to Home</a>
       </div>
     </div>
     {% endif %}
