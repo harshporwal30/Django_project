@@ -458,12 +458,11 @@
 }
 
 .check-button{
-  display: inline-block;
+    display: inline-block;
     background-color: var(--accent-color);
     color: #fff;
     padding: 10px 20px;
     cursor: pointer;
-    text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
@@ -648,16 +647,22 @@ select option:hover {
 
 
 
-.booking-summary-container {
-  
+.invoice-container {
+  max-width: 600px;
   margin: 50px auto;
   background-color: #fff;
   padding: 20px;
+  border: 2px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.booking-details, 
+.invoice-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.booking-details
 .confirmation-message {
   margin-bottom: 20px;
 }
@@ -668,17 +673,12 @@ select option:hover {
 /* profile css */
 
 .profile-container {
-  
-  margin: 20px auto;
-  padding: 20px;
+  max-width: 800px;
+  margin: 50px auto;
   background-color: #fff;
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.profile-header {
-  text-align: center;
-  margin-bottom: 20px;
 }
 
 .profile-section {
@@ -687,23 +687,29 @@ select option:hover {
 
 .booking-item {
   border-bottom: 1px solid #ccc;
-  padding: 10px;
+  padding: 15px 0;
+}
+
+.button-container {
   display: flex;
   
   align-items: center;
 }
 
-.cancel-button {
+.cancel-button,
+.payment-button {
   background-color: #ff5500;
   color: #fff;
   border: none;
-  padding: 8px 12px;
+  padding: 10px;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 3%;
+  text-decoration: none;
+  margin: 8px;
 }
 
-.cancel-button:hover {
+.cancel-button:hover,
+.payment-button:hover {
   background-color: #ff3300;
 }
 
