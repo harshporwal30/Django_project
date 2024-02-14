@@ -11,23 +11,21 @@
         <h1>Discover the Best Dining Experience</h1>
         <!-- Search and Filter Options -->
         <div class="search-filter">
+          <form method="get" action="{% url 'search_restaurants' %}">
             <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search restaurants">
-                <button id="search-button">Search</button>
+                <input type="text" id="search-input" name="q" placeholder="Search restaurants">
+                <button id="search-button">Search</button></form>
             </div>
             <div class="filter-options">
-                <label for="cuisine">Cuisine:</label>
-                <select id="cuisine">
-                    <option value="all">All Cuisines</option>
-                    <option value="indian">Indian</option>
-                    <option value="italian">Italian</option>
-                    <option value="chinese">Chinese</option>
-                </select>
+                
                 <label for="location">Location:</label>
-                <select id="location">
+                <select id="location" onchange="filterRestaurants()">
+                    <option value="">Select Location</option>
+                    {% if search %}
                     <option value="all">All Locations</option>
-                    <option value="Mumbai">Mumbai</option>
-                    <option value="NaviMumbai">Navi Mumbai</option>
+                    {% endif %}
+                    <option value="Mumbai, Maharashtra">Mumbai</option>
+                    <option value="Navi Mumbai, Maharashtra">Navi Mumbai</option>
                     <option value="nearby">Nearby</option>
                 </select>
             </div>
@@ -36,7 +34,13 @@
 
     <!-- Featured Restaurants or Offers -->
     <div class="featured-restaurants">
+      {% if search %}
+        <h2>Showing Results for "{{search}}"</h2>
+      {% elif query %}
+      <h2>No Restaurants Found</h2>
+      {% else %}
         <h2>Featured Restaurants</h2>
+      {% endif %}
         <div class="grid-container">
             <!-- Restaurant 1 -->
             {% for i in resobj %}
@@ -44,7 +48,7 @@
                 <img class="imgcss" src="{{i.res_display.url}}" alt="Indian Restaurant 1">
                 <h3>{{ i.res_name }}</h3>
                 <p>{{i.res_description}}</p>
-                <p><i class="fa fa-map-marker" aria-hidden="true"></i>  {{i.res_address}}</p>
+                <p class="location"><i class="fa fa-map-marker" aria-hidden="true"></i>  {{i.res_address}}</p>
                 <a href="{% url 'viewdetails' i.id %}">Book Table</a>
             </div>
             {% endfor %}
@@ -135,9 +139,17 @@
   {% endif %}
 
   <script>
-    
+    function filterRestaurants() {
+        var locationSelect = document.getElementById("location");
+        var selectedLocation = locationSelect.value;
+        
+        window.location.replace("http://127.0.0.1:8000/filter-by-location/"+selectedLocation+"/")
+
+        
+    }
   </script>
-    {% endblock %}
+
+  {% endblock %}
 </body>
 
 </html>
