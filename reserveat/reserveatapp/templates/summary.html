@@ -83,8 +83,10 @@
 
   {% if user %}
   
-  <div class="booking-summary-container">
-    <h1>Booking Summary</h1>
+  <div class="invoice-container">
+    <div class="invoice-header">
+      
+    </div>
 
     <div class="booking-details">
       <h2>Booking Information</h2>
@@ -92,9 +94,9 @@
       <p><strong>Name:</strong> {{booking.customerid.first_name}}</p>
       <p><strong>Email:</strong> {{booking.customerid.email}}</p>
       <p><strong>Contact Number:</strong> {{booking.customerid.phoneno}}</p>
-      <p><strong>Date:</strong>{{booking.booking_date}}</p>
-      <p><strong>Time:</strong> {{booking.start_time}}-{{booking.end_time}}</p>
-      <p><strong>Table Number:</strong>{{booking.tableid.tableno}}</p>
+      <p><strong>Date:</strong> {{booking.booking_date}}</p>
+      <p><strong>Time:</strong> {{booking.start_time}} - {{booking.end_time}}</p>
+      <p><strong>Table Number:</strong> {{booking.tableid.tableno}}</p>
     </div>
 
     <div class="confirmation-message">
@@ -102,9 +104,10 @@
         <div id="paypal-button-container" style="width: fit-content;" >
         
       </div>                 
-      <button onclick="initPayPalButton()" name="paypapl" id="paypapl">Do payment</button>
+      <button onclick="initPayPalButton()" name="paypapl" id="paypapl" class="cancel-button">Do payment</button>
+      <a href="{% url 'index' %}" class="cancel-button" style="text-decoration: none; ">Go to Home</a>
     </div> 
-    <a href="{% url 'index' %}">Go to Home</a>
+    
     </div>
   </div>
   {% endif %}
