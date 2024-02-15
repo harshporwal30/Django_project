@@ -5,45 +5,45 @@
 
 <body>
 {% block mycontent %}
-  <div class="profile-container">
+<div class="profile-container">
 
+  <div class="profile-section">
+    <h2>Personal Information</h2>
+    <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+  </div>
 
-    <div class="profile-section">
-      <h2>Personal Information</h2>
-      <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      
-    </div>
+  <div class="profile-section">
+    <h2>Contact Information</h2>
+    <p><strong>Phone:</strong> {{ user.phoneno }}</p>
+    <p><strong>Address:</strong> {{ user.address }}</p>
+  </div>
 
-    <div class="profile-section">
-      <h2>Contact Information</h2>
-      <p><strong>Phone:</strong> {{ user.phoneno }}</p>
-      <p><strong>Address:</strong> {{ user.address }}</p>
-      
-    </div>
-
-    <div class="profile-section">
-      <h2>Bookings</h2>
-      {% for bookings in booking %}
-      <div class="booking-item">
-        <p>{{ bookings.restaurantid.res_name }} - {{ bookings.booking_date }} at {{ bookings.start_time }} - Status: {{ bookings.booking_status }}</p>
-        {% if bookings.booking_status == 'Pending' %}
-        <a class="cancel-button" href="{% url 'summary' bookings.bookingid %}" style="text-decoration: none;">Complete Payment</a>
-        {% endif %}
+  <div class="profile-section">
+    <h2>Bookings</h2>
+    {% if booking %}
+    {% for bookings in booking %}
+    <div class="booking-item">
+      <p>{{ bookings.restaurantid.res_name }} - {{ bookings.booking_date }} at {{ bookings.start_time }} - Status: {{ bookings.booking_status }}</p>
+      {% if bookings.booking_status == 'Pending' %}
+      <div class="button-container">
+        <a class="payment-button" href="{% url 'summary' bookings.bookingid %}">Complete Payment</a>
         <form method="post" action="{% url 'cancel-booking' %}">
-            {% csrf_token %}
-            <input type="hidden" name="booking_id" value="{{bookings.id}}">
-            {% if bookings.booking_status == 'Confirmed' %}
-            <button class="cancel-button">Cancel</button></form>
-            {% endif %}
-            {% if bookings.booking_status == 'Pending' %}
-            <button class="cancel-button">Cancel</button></form>
-            {% endif %}
+          {% csrf_token %}
+          <input type="hidden" name="booking_id" value="{{bookings.id}}">
+          <button class="cancel-button">Cancel</button>
+        </form>
       </div>
-      {% endfor %}
+      {% endif %}
     </div>
+    {% endfor %}
+    {% else %}
+    <h3>No Bookings Yet</h3>
+    {% endif %}
+  </div>
 
-    <!-- Add more sections as needed -->
+
+    
 
   </div>
 {% endblock %}
