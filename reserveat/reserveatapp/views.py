@@ -9,7 +9,7 @@ from django.http import QueryDict
 import string
 import random
 from datetime import datetime
-
+from django.core.mail import EmailMessage
 # Create your views here.
 def reg(request):
     if request.method == "GET":
@@ -50,7 +50,7 @@ def adminlogin(request):
 def logout(request):
     if 'admin' in request.session:
         del request.session['admin']
-        return redirect('../adlogin/')
+        return redirect('../admin-login/')
     elif 'user' in request.session:
         del request.session['user']
         return redirect('../login/')
@@ -345,6 +345,29 @@ def login(request):
             return render(request, 'login.html', {'msg': error_message})
         
 
+def search_restaurants(request):
+    if 'q' in request.GET:
+        query = request.GET['q']
+        results = restaurant.objects.filter(res_name__icontains=query)
+        if results:
+            return render(request, 'index.html', {'resobj': results, 'search': query})
+        else:
+            return render(request, 'index.html', {'query': query})
+    else:
+        return render(request, 'index.html', {'query': ''})
+    
+def locationfilter(request,location):
+    res_location= location
+    if res_location == "all":
+        return redirect("../../index/")
+    else:
+        results = restaurant.objects.filter(res_address__iexact=location)
+        if results:
+            return render(request, 'index.html', {'resobj': results, 'search': location})
+        else:
+            return render(request, 'index.html', {'query': location})
+    
+
 
 def details(request, id):
     if 'user' in request.session:
@@ -477,4 +500,6 @@ def paymentsuccess(request, tid, orderid):
     tbl= tables.objects.get(id= bkobj.tableid.id)
     tbl.booking_status= "Booked"
     tbl.save()
+    send_mail = EmailMessage('Booking Information',f'Dear {cobj.first_name} Thank you for choosing {bkobj.restaurantid.res_name} for your dining experience. We are delighted to confirm your table reservation for {bkobj.booking_date} at {bkobj.start_time}.\nReservation Details:\nDate: {bkobj.booking_date}\nTime: {bkobj.start_time} till {bkobj.end_time}\nReservation Name: {cobj.first_name}',to=['harsh30porwal@gmail.com'] )
+    send_mail.send()
     return render(request, 'paymentsuccess.html', {'bk': bkobj, 'user': cobj, 'booking': booking})
