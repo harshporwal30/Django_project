@@ -21,11 +21,19 @@ def reg(request):
         email= request.POST['email']
         phone= request.POST['telephoneno']
         pswd= request.POST['password']
-        pwd= make_password(pswd)
-        adminobj= resadmin(firstname=fn, lastname=ln,email=email,phoneno=phone,password=pwd)
-        adminobj.save()
-        success_message = "Registered successfully! You can now log in."
-        return render(request, 'adminreg.html', {'success_message': success_message})
+        pwd= request.POST['password1']
+        
+
+        if pswd== pwd:
+
+            adminobj= resadmin(firstname=fn, lastname=ln,email=email,phoneno=phone,password=pwd)
+            adminobj.save()
+            success_message = "Registered successfully! You can now log in."
+            return render(request, 'adminreg.html', {'success_message': success_message})
+
+        else:
+            success_message = "incorect password"
+            return render (request, 'adminreg.html', {'success_message': success_message})
     
 def adminlogin(request):
     if request.method == "GET":
